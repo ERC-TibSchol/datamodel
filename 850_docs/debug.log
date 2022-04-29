@@ -1,0 +1,42 @@
+** debug run Do 28 Apr 2022 11:37:57 CEST **
+414	$parameters=
+254	*** generateDocs 'model.xml' 'model' ***
+223	*** validate() ***
+192	*** toDot() ***
+193	$inputfile=model.xml
+194	$dotoutputfile=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.dot
+195	$imgoutputfile=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.dot.svg
+196	saxon -xsl:/home/dschopper/repo/modeller/model2dot.xsl  -s:model.xml -o:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.dot -xi:on  debug=true
+43	saxon -xsl:/home/dschopper/repo/modeller/model2dot.xsl
+199	wrote dotfile to /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.dot
+200	dot /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.dot -Tsvg -o /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.dot.svg
+264	$dotfilepath=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.dot.svg
+52	saxon -s:model.xml -xsl:/home/dschopper/repo/modeller/it.xsl -o:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/modelFull.xml -xi:on
+43	saxon -s:model.xml
+267	$model=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/modelFull.xml
+213	** model2html /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/modelFull.xml /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.dot.svg **
+216	saxon -xsl:/home/dschopper/repo/modeller/model2html.xsl -o:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html -xi:on -s:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/modelFull.xml pathToGraphImage=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.dot.svg  debug=true
+43	saxon -xsl:/home/dschopper/repo/modeller/model2html.xsl
+272	$html=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html
+275	highlight /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/modelFull.xml
+62	** highlighting code listings **
+63	$html=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html
+64	$model=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/modelFull.xml
+280	saxon -xsl:/home/dschopper/repo/modeller/replaceListingWithHighlightedHtml.xsl -o:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html -s:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html listingHtmlFilenamePattern=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/listing_#.html  debug=true
+43	saxon -xsl:/home/dschopper/repo/modeller/replaceListingWithHighlightedHtml.xsl
+117	*** toImg() ***
+120	$html=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html
+121	$format=svg
+130	*** done toImg() ***
+136	*** embedImgs() ***
+43	saxon -o:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xmlstandalone.html
+137	$imgDataXML=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/imageData.xml
+138	$workingdir=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp
+139	$html=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html
+142	found  images in /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html
+174	saxon -xsl:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/injectListing.xsl -s:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xml.html imgFilnamePattern=listing_#.html.svg pathToImageDataXML=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/imageData.xml workingdir=/home/dschopper/data/TibSchol_datamodel/850_docs/tmp listingsXPathExpr=h:code[@data-type='listing']  debug=true
+43	saxon -xsl:/home/dschopper/data/TibSchol_datamodel/850_docs/tmp/injectListing.xsl
+303	$title=TibSchol Data Model
+304	$version=0.1
+305	$author=Daniel Schopper
+307	pandoc -s -f html -i /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.xmlstandalone.html -o /home/dschopper/data/TibSchol_datamodel/850_docs/tmp/model.docx -M version=0.1 -M title=TibSchol

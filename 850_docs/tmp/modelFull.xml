@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="/home/dschopper/repo/modeller/model.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?><model>
+    <meta>
+        <title>TibSchol Data Model</title>
+        <contributor role="author">
+            <person ID="DS">
+                <name>Daniel Schopper</name>
+                <contact>daniel.schopper@oeaw.ac.at</contact>
+            </person>
+        </contributor>
+        <version>0.1</version>
+        <changelog>
+            <change status="draft" when="2022-04-28" who="DS">set up document</change>
+        </changelog>
+        <audience>EXTERNAL</audience>
+        <namespaces>
+            <namespace prefix="bibframe">http://id.loc.gov/ontologies/bibframe/</namespace>
+        </namespaces>
+    </meta>
+    <description><p>This is the overall data model for the TibSchol project.</p></description>
+    <classes>
+        <class ID="Manuscript">
+            <name>Manuscript</name>
+            <definition>
+                <p>A physical object transmitting one version of a given <className>Work</className></p>
+                <p>Cf. Bibframe definition: "Single example of an Instance"</p>
+            </definition>
+            
+            <mapping targetLanguage="bibframe">
+                <className uri="https://id.loc.gov/ontologies/bibframe/Item.rdf">bibframe:Item</className>
+            </mapping>
+        </class>
+        
+        <class ID="Work">
+            <name>Work</name>
+            <definition>
+                <p>The abstract notion of an intellectual creation by one or several <className target="Person">persons</className>, irrespective of it’s exact transmitted version, language or form.</p></definition>
+        </class>
+        
+        <class ID="Person">
+            <name>Person</name>
+            <definition/>
+            <mapping targetLanguage="bibframe">
+                <className uri="https://id.loc.gov/ontologies/bibframe/Person.rdf">bibframe:Person</className>
+            </mapping>
+        </class>
+        
+        <class ID="Instance">
+            <name>Instance</name>
+            <definition>Resource reflecting an individual, material embodiment of a Work.</definition>
+            <mapping targetLanguage="bibframe">
+                <className uri="https://id.loc.gov/ontologies/bibframe/Instance.rdf">bibframe:Instance</className>
+            </mapping>
+        </class>
+        
+        <class ID="Excerpt">
+            <name>Excerpt</name>
+            <definition>An excerpt from an <className>Instance</className>.</definition>
+        </class>
+        
+        <class ID="Contribution">
+            <name>Contribution</name>
+            <definition>Agent and role with respect to the resource being described.</definition>
+            <mapping targetLanguage="bibframe">
+                <className uri="https://id.loc.gov/ontologies/bibframe/Contribution.rdf">bibframe:Contribution</className>
+            </mapping>
+        </class>
+        
+        <class ID="Role">
+            <name>Role</name>
+            <definition/>
+        </class>
+        
+    </classes>
+    <relations>
+        <relation ID="contributionContributionOfWork">
+            <sourceClass target="Contribution">
+                <arity>1-n</arity>
+            </sourceClass>
+            <targetClass target="Work">
+                <arity>1</arity>
+            </targetClass>
+            <name>Contribution of</name>
+            <reverseName>has contribution</reverseName>
+        </relation>
+        <relation ID="contributionContributionOfItem">
+            <sourceClass target="Contribution">
+                <arity>1-n</arity>
+            </sourceClass>
+            <targetClass target="Manuscript">
+                <arity>1</arity>
+            </targetClass>
+            <name>Contribution of</name>
+            <reverseName>has contribution</reverseName>
+        </relation>
+        
+        <relation ID="contributionContributionOfInstance">
+            <sourceClass target="Contribution">
+                <arity>1-n</arity>
+            </sourceClass>
+            <targetClass target="Instance">
+                <arity>1</arity>
+            </targetClass>
+            <name>Contribution of</name>
+            <reverseName>has contribution</reverseName>
+        </relation>
+        
+        
+        <relation ID="contributionAsRole">
+            <sourceClass target="Contribution">
+                <arity>1-n</arity>
+            </sourceClass>
+            <targetClass target="Role">
+                <arity>1</arity>
+            </targetClass>
+            <name>contribution as</name>
+            <reverseName>by contribution</reverseName>
+        </relation>
+    </relations>
+    <vocabularies>
+        
+    </vocabularies>
+    <datatypes>
+        <datatype ID="shortText">
+            <name>short text</name>
+        </datatype>
+        <datatype ID="longText">
+            <name>long text</name>
+        </datatype>
+        <datatype ID="longTextWithAnnotations">
+            <name>long text with annotations</name>
+        </datatype>
+        <datatype ID="TEIdocument">
+            <name>TEI document</name>
+        </datatype>
+       
+    </datatypes>
+    <references>
+        <reference ID="bibframe">
+            <name>Bibframe Version 2.0</name>
+            <citation key="bibframe 2.0"><ref uri="https://www.loc.gov/bibframe/docs/bibframe2-model.html">Overview of the BIBFRAME 2.0 Model</ref></citation>
+        </reference>
+    </references>
+</model>

@@ -1,0 +1,84 @@
+
+        digraph TibScholDataModel {
+            node [fontname = "Bitstream Vera Sans" fontsize = "8" shape = "record" rankdir="TB"]
+            edge [fontname = "Bitstream Vera Sans" fontsize = "8" ]    
+            nodesep = 1
+            ranksep = 1
+            TBbalance = "max"
+            label = "TibSchol Data Model"
+        
+            Manuscript [
+            label = "{Manuscript}"
+            labeltooltip = "A physical object transmitting one version of a given WorkCf. Bibframe definition: \"Single example of an Instance\""
+            URL = "#Manuscript"
+            
+        ]
+        Work [
+            label = "{Work}"
+            labeltooltip = "The abstract notion of an intellectual creation by one or several persons, irrespective of it’s exact transmitted version, language or form."
+            URL = "#Work"
+            
+        ]
+        Person [
+            label = "{Person}"
+            labeltooltip = ""
+            URL = "#Person"
+            
+        ]
+        Instance [
+            label = "{Instance}"
+            labeltooltip = "Resource reflecting an individual, material embodiment of a Work."
+            URL = "#Instance"
+            
+        ]
+        Excerpt [
+            label = "{Excerpt}"
+            labeltooltip = "An excerpt from an Instance."
+            URL = "#Excerpt"
+            
+        ]
+        Contribution [
+            label = "{Contribution}"
+            labeltooltip = "Agent and role with respect to the resource being described."
+            URL = "#Contribution"
+            
+        ]
+        Role [
+            label = "{Role}"
+            labeltooltip = ""
+            URL = "#Role"
+            
+        ]
+        Contribution -> Work [
+                        
+                        label = "Contribution of"
+                        labelfloat = false
+                        URL = "#contributionContributionOfWork"
+                        
+                        ]
+                Contribution -> Manuscript [
+                        
+                        label = "Contribution of"
+                        labelfloat = false
+                        URL = "#contributionContributionOfItem"
+                        
+                        ]
+                Contribution -> Instance [
+                        
+                        label = "Contribution of"
+                        labelfloat = false
+                        URL = "#contributionContributionOfInstance"
+                        
+                        ]
+                Contribution -> Role [
+                        
+                        label = "contribution as"
+                        labelfloat = false
+                        URL = "#contributionAsRole"
+                        
+                        ]
+                
+        
+            
+        }
+    
