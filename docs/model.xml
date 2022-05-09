@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml-model href="/home/dschopper/repo/modeller/model.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>-->
 <model xmlns:xi="http://www.w3.org/2001/XInclude">
     <meta>
         <title>TibSchol Data Model</title>
@@ -19,10 +20,15 @@
                 <name>Saranya Balasubramanian</name>
             </person>
         </contributor>
+        <contributor role="principle">
+            <person ID="PH">
+                <name>Pascale Hugon</name>
+            </person>
+        </contributor>
         <version>0.1</version>
         <changelog>
             <change status="draft" when="2022-04-28" who="DS">set up document</change>
-        <change status="draft" when="2022-05-06" who="DS">adding relations from </change>
+            <change status="draft" when="2022-05-06" who="DS">adding relations from APIS_Entities -List of Relations.xlsx</change>
         </changelog>
         <audience>EXTERNAL</audience>
         <namespaces>
@@ -111,7 +117,8 @@
                             <datatypeName target="vocabTerm" vocabRef="vocab.curationModes"/>
                             <note>differentiate between relations added by hand in APIS or imported from a TEI source</note>
                         </property>
-                        <property ID="WorkQuotesWork.provenience">
+                        
+                        <property ID="WorkQuotesWork.provenance">
                             <arity>0-1</arity>
                             <name>Provenience</name>
                             <datatypeName target="shortText"/>
@@ -129,7 +136,8 @@
                     </targetClass>
                     <name>quotes directly</name>
                     <reverseName>is quoted directly by</reverseName>
-                    <definition>This relation means that Work A explicitly quotes Work B, providing some kind of reference in the text.</definition>
+                    <definition>This relation means that Work A explicitly quotes Work B, providing some kind of reference to in the text (the quoted work's title or a paraphrase of it).</definition>
+                    <CHECKME status="new" when="2022-05-09" who="PH">check definition</CHECKME>
                 </relation>
                 <relation ID="WorkQuotesIndirectlyWork" parent="WorkQuotesWork">
                     <sourceClass target="Work">
@@ -140,6 +148,8 @@
                     </targetClass>
                     <name>quotes indirectly</name>
                     <reverseName>is quoted indirectly by</reverseName>
+                    <definition>This relation means that Work A implicitly quotes Work B witout making the exact source explicit,</definition>
+                    <CHECKME status="new" when="2022-05-09" who="PH">check definition</CHECKME>
                 </relation>
                 
                 <relation ID="workHasSubject">
@@ -328,9 +338,9 @@
                         </targetClass>
                         <name>was spiritual friend of</name>
                         <reverseName>had spiritual friend</reverseName>
-                    </relation>
+                </relation>
                     
-                <relation ID="PersonWasFellowstudentOfPerson">
+                <relation ID="PersonWasFellowstudentOfPerson" type="implicit">
                         <sourceClass target="Person">
                             <arity>0-n</arity>
                         </sourceClass>
@@ -340,20 +350,20 @@
                         <name>was fellow student of</name>
                         <reverseName>had fellow student</reverseName>
                         <CHECKME who="DS" when="2022-05-06" status="new">shouldn't be implicit by two <relName target="PersonWasStudentOfPerson"/> within an overlapping time range?</CHECKME>
-                    </relation>
+                </relation>
                    
-                   
-                    <relation ID="PersonWasPatronOfPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was patron of</name>
-                        <reverseName>had patron</reverseName>
-                    </relation>
-                
+               
+                <relation ID="PersonWasPatronOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>was patron of</name>
+                    <reverseName>had patron</reverseName>
+                </relation>
+            
                 
                 
                 
@@ -392,16 +402,7 @@
                         </property>
                     </properties>
                 </relation>
-                <relation ID="personWasPatronOfPerson">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>was patron of</name>
-                <reverseName>had patron</reverseName>
-              </relation>
+               
              
               <relation ID="personlistenedtotheteachingsofPerson" status="needs_review">
                 <sourceClass target="Person">
