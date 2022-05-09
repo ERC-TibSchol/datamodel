@@ -1,0 +1,15 @@
+sourceClass,sourceClassArity,directName,reverseName,targetClassArity,targetClass,flags
+Person,0-1,Father,child,0-n,Person,
+Person,0-1,Mother,child,0-n,Person,
+Person,0-n,sibling,sibling,0-n,Person,
+Person,0-n,Nephew,uncle,0-n,Person,
+Person,0-n,Uncle,nefew,0-n,Person,
+Person,0-n,Aunt,nefew,0-n,Person,
+Person,0-n,Cousin,Cousin,0-n,Person,
+Person,0-n,was member of clan,clan,0-n,Person,
+Person,0-n,Student,Teacher,0-n,Person,t
+Person,0-n,Disciple,Spiritual teacher,0-n,Person,t
+Person,0-n,Spiritual Friend,Has as spiritual friend,0-n,Person,t
+Person,0-n,Fellow student,Fellow student,0-n,Person,t
+Person,0-n,Friend/fellow monk,Friend/fellow monk,0-n,Person,t
+Person,0-n,Patron,Protegee,0-n,Person,

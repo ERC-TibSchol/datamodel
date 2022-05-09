@@ -1,0 +1,24 @@
+<relation ID="PersonWas{DIRECTNAME_NB}OfPerson">
+  <sourceClass target="Person">
+    <arity>{SOURCECLASS_ARITY}</arity>
+  </sourceClass>
+  <targetClass target="Person">
+    <arity>{TARGETCLASS_ARITY}</arity>
+  </targetClass>
+  <name>was {DIRECTNAME_LC} of</name>
+  <reverseName>was {REVERSENAME_LC} of</reverseName>
+  <INCLUDE FLAG="t">
+    <properties>
+      <property ID="personWas{DIRECTNAME_NB}OfPerson.begin">
+        <arity>0-1</arity>
+        <name>begin</name>
+        <datatype target="year"/>
+      </property>
+      <property ID="personWas{DIRECTNAME_NB}OfPerson.end">
+          <arity>0-1</arity>
+          <name>end</name>
+          <datatypeName target="year"/>
+        </property>
+    </properties>
+  </INCLUDE>
+</relation>
