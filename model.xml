@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--<?xml-model href="/home/dschopper/repo/modeller/model.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>-->
+<?xml-model href="/home/dschopper/repo/modeller/model.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <model xmlns:xi="http://www.w3.org/2001/XInclude">
     <meta>
         <title>TibSchol Data Model</title>
@@ -218,27 +218,27 @@
                 </relation>
               
               
-                    <relation ID="PersonWasFatherOfPerson">
-                        <sourceClass target="Person">
-                            <arity>1</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was father of</name>
-                        <reverseName>had father</reverseName>
-                    </relation>
+                <relation ID="PersonWasFatherOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-1</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Father Of</name>
+                    <reverseName>Was Child Of</reverseName>
+                </relation>
                 
-                    <relation ID="PersonWasMotherOfPerson">
-                        <sourceClass target="Person">
-                            <arity>1</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was mother of</name>
-                        <reverseName>had mother</reverseName>
-                    </relation>
+                <relation ID="PersonWasMotherOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-1</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Mother Of</name>
+                    <reverseName>Was Child Of</reverseName>
+                </relation>
                 
                     <relation ID="PersonWassiblingOfPerson">
                         <sourceClass target="Person">
@@ -252,6 +252,9 @@
                         <CHECKME who="DS" when="2022-05-06" status="new">Shouldn't this be implicit by common parents?</CHECKME>
                     </relation>
                 
+                
+                
+                
                     <relation ID="PersonWasNephewOfPerson">
                         <sourceClass target="Person">
                             <arity>0-n</arity>
@@ -264,95 +267,147 @@
                         <CHECKME who="DS" when="2022-05-06" status="new">Shouldn't this be implicit by <relName target="PersonWasUncleOfPerson"/> or <relName target="PersonWasAuntOfPerson"/> ?</CHECKME>
                     </relation>
                     
-                    <relation ID="PersonWasUncleOfPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was uncle of</name>
-                        <reverseName>had uncle</reverseName>
-                    </relation>
+                <relation ID="PersonWasUncleOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Uncle Of</name>
+                    <reverseName>Had Uncle</reverseName>
+                </relation>
                 
-                    <relation ID="PersonWasAuntOfPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was aunt of</name>
-                        <reverseName>had aunt</reverseName>
-                    </relation>
+                    
+                    
+                <relation ID="PersonWasAuntOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Aunt Of</name>
+                    <reverseName>Had Aunt</reverseName>
+                </relation>
+                <relation ID="PersonWasCousinOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Cousin Of</name>
+                    <reverseName>Was Cousin Of</reverseName>
+                </relation>
                 
-                    <relation ID="PersonWasCousinOfPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was cousin of</name>
-                        <reverseName>had cousin</reverseName>
-                    </relation>
+                    
+                <relation ID="PersonWasFellowMemberOfClanWithPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Fellow Member Of Clan With</name>
+                    <reverseName>Was Fellow Member Of Clan With</reverseName>
+                    <CHECKME who="DS" when="2022-05-06" status="new">Does this relate clan members one to each other? If yes, this should probably be impliced via <path><relName target="PersonWasMemberOfOrganization"/> <className target="Organization"/> <propName target="organization.type"/>="clan"</path></CHECKME>
+                </relation>
                 
-                    <relation ID="PersonWasClanMemberWithPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was clan member together with</name>
-                        <reverseName>was clan member together with</reverseName>
-                        <CHECKME who="DS" when="2022-05-06" status="new">Does this relate clan members one to each other? If yes, this should probably be impliced via <path><relName target="PersonWasMemberOfOrganization"/> <className target="Organization"/> <propName target="organization.type"/>="clan"</path></CHECKME>
-                    </relation>
                 
-                    <relation ID="PersonWasStudentOfPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was student of</name>
-                        <reverseName>had student</reverseName>
-                    </relation>
-                    <relation ID="PersonWasDiscipleOfPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was disciple of</name>
-                        <reverseName>had disciple</reverseName>
-                    </relation>
-                    <relation ID="PersonWasSpiritualFriendOfPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was spiritual friend of</name>
-                        <reverseName>had spiritual friend</reverseName>
+                <relation ID="PersonWasStudentOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Student Of</name>
+                    <reverseName>Was Teacher Of</reverseName>
+                    <properties>
+                        <property ID="personWasStudentOfPerson.begin">
+                            <arity>0-1</arity>
+                            <name>begin</name>
+                            <datatypeName target="year"/>
+                        </property>
+                        <property ID="personWasStudentOfPerson.end">
+                            <arity>0-1</arity>
+                            <name>end</name>
+                            <datatypeName target="year"/>
+                        </property>
+                    </properties>
+                </relation>
+                <relation ID="PersonWasDiscipleOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Disciple Of</name>
+                    <reverseName>Was Spiritual Teacher Of</reverseName>
+                    <properties>
+                        <property ID="personWasDiscipleOfPerson.begin">
+                            <arity>0-1</arity>
+                            <name>begin</name>
+                            <datatypeName target="year"/>
+                        </property>
+                        <property ID="personWasDiscipleOfPerson.end">
+                            <arity>0-1</arity>
+                            <name>end</name>
+                            <datatypeName target="year"/>
+                        </property>
+                    </properties>
+                </relation>
+                
+                <relation ID="PersonWasSpiritualFriendOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Spiritual Friend Of</name>
+                    <reverseName>Had As Spiritual Friend</reverseName>
+                    <properties>
+                        <property ID="personWasSpiritualFriendOfPerson.begin">
+                            <arity>0-1</arity>
+                            <name>begin</name>
+                            <datatypeName target="year"/>
+                        </property>
+                        <property ID="personWasSpiritualFriendOfPerson.end">
+                            <arity>0-1</arity>
+                            <name>end</name>
+                            <datatypeName target="year"/>
+                        </property>
+                    </properties>
+                </relation>
+                
+                
+                <relation ID="PersonWasFllowStudentOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Fllow Student Of</name>
+                    <reverseName>Was Fellow Student Of</reverseName>
+                    <CHECKME who="DS" when="2022-05-06" status="new">shouldn't be implicit by two <relName target="PersonWasStudentOfPerson"/> within an overlapping time range?</CHECKME>
+                    <properties>
+                        <property ID="personWasFllowStudentOfPerson.begin">
+                            <arity>0-1</arity>
+                            <name>begin</name>
+                            <datatypeName target="year"/>
+                        </property>
+                        <property ID="personWasFllowStudentOfPerson.end">
+                            <arity>0-1</arity>
+                            <name>end</name>
+                            <datatypeName target="year"/>
+                        </property>
+                    </properties>
                 </relation>
                     
-                <relation ID="PersonWasFellowstudentOfPerson" type="implicit">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was fellow student of</name>
-                        <reverseName>had fellow student</reverseName>
-                        <CHECKME who="DS" when="2022-05-06" status="new">shouldn't be implicit by two <relName target="PersonWasStudentOfPerson"/> within an overlapping time range?</CHECKME>
-                </relation>
-                   
-               
                 <relation ID="PersonWasPatronOfPerson">
                     <sourceClass target="Person">
                         <arity>0-n</arity>
@@ -360,25 +415,46 @@
                     <targetClass target="Person">
                         <arity>0-n</arity>
                     </targetClass>
-                    <name>was patron of</name>
-                    <reverseName>had patron</reverseName>
+                    <name>Was Patron Of</name>
+                    <reverseName>Had Patron</reverseName>
+                    <properties>
+                        <property ID="personWasPatronOfPerson.begin">
+                            <arity>0-1</arity>
+                            <name>begin</name>
+                            <datatypeName target="year"/>
+                        </property>
+                        <property ID="personWasPatronOfPerson.end">
+                            <arity>0-1</arity>
+                            <name>end</name>
+                            <datatypeName target="year"/>
+                        </property>
+                    </properties>
                 </relation>
-            
+                <relation ID="PersonWasFriendFellowMonkOfPerson">
+                    <sourceClass target="Person">
+                        <arity>0-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>0-n</arity>
+                    </targetClass>
+                    <name>Was Friend/Fellow Monk Of</name>
+                    <reverseName>Was Friend/Fellow Monk Of</reverseName>
+                    <note>This is a shortcut for <path><instanceName classRef="Person">A</instanceName>, <instanceName classRef="Person">B</instanceName> <relName target="PersonWasMemberOfOrganization">was member of</relName> <instanceName classRef="Organization">monastary M</instanceName><propName target="organization.type">="monastery"</propName></path></note>
+                    <properties>
+                        <property ID="personWasFriendFellowMonkOfPerson.begin">
+                            <arity>0-1</arity>
+                            <name>begin</name>
+                            <datatypeName target="year"/>
+                        </property> 
+                        <property ID="personWasFriendFellowMonkOfPerson.end">
+                            <arity>0-1</arity>
+                            <name>end</name>
+                            <datatypeName target="year"/>
+                        </property>
+                    </properties>
+                </relation>
                 
                 
-                
-              
-              <relation ID="personWasFellowMonkOfPerson" type="implicit">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>was fellow monk of</name>
-                <reverseName>had fellow monk</reverseName>
-                  <note>This is a shortcut for <path><instanceName classRef="Person">A</instanceName>, <instanceName classRef="Person">B</instanceName> <relName target="PersonWasMemberOfOrganization">was member of</relName> <instanceName classRef="Organization">monastary M</instanceName><propName target="organization.type">="monastery"</propName></path></note>
-              </relation>
                 
                 <relation ID="PersonWasMemberOfOrganization">
                     <sourceClass target="Person">
@@ -404,7 +480,7 @@
                 </relation>
                
              
-              <relation ID="personlistenedtotheteachingsofPerson" status="needs_review">
+              <!--<relation ID="personlistenedtotheteachingsofPerson" status="needs_review">
                 <sourceClass target="Person">
                   <arity>0-n</arity>
                 </sourceClass>
@@ -412,9 +488,8 @@
                   <arity>0-n</arity>
                 </targetClass>
                 <name>listened to the teachings of</name>
-              <reverseName>had listened to the teachings of</reverseName>
-                  
-              </relation>
+                <reverseName>had listened to the teachings of</reverseName>
+              </relation>-->
                 
                 
               <relation ID="personmeetsPerson" status="needs_review">
@@ -429,7 +504,7 @@
                 <CHECKME who="DS" when="2022-05-05" status="new">Probably we want to attach the <className>place</className> of the meeting, so we should introduce an <className>Event</className> reprenting the meeting: <path><instanceName classRef="Person">A</instanceName>, <instanceName classRef="Person">B</instanceName> <relName target="personParticipatedInEvent">participated in</relName> <instanceName classRef="Event">meeting</instanceName>; <relName target="eventTookPlaceAt"/></path>.</CHECKME>
               </relation>
                 
-              <relation ID="personorderstopreparethexylographeditiontoPerson" status="needs_review">
+              <!--<relation ID="personorderstopreparethexylographeditiontoPerson" status="needs_review">
                 <sourceClass target="Person">
                   <arity>0-n</arity>
                 </sourceClass>
@@ -452,7 +527,7 @@
                 <reverseName>participated together at Rtse lde religious council</reverseName>
                   <CHECKME who="DS" when="2022-05-05" status="new">This should be generalized to <path><instanceName classRef="Person">A</instanceName>, <instanceName classRef="Person">B</instanceName> <relName target="personParticipatedInEvent">participated in</relName> <instanceName classRef="Event">Rtse lde religious council</instanceName></path></CHECKME>
               </relation>
-                
+              -->  
                 <relation ID="personParticipatedInEvent">
                     <sourceClass target="Person">
                         <arity>1-n</arity>
@@ -464,7 +539,7 @@
                     <reverseName>had participants</reverseName>
                 </relation>
                 
-                <relation ID="personpreparesthexylographeditionundertheordertoPerson">
+                <!--<relation ID="personpreparesthexylographeditionundertheordertoPerson">
                 <sourceClass target="Person">
                   <arity>0-n</arity>
                 </sourceClass>
@@ -524,7 +599,7 @@
                   <CHECKME who="DS" when="2022-05-05" status="new">I'm not sure what this is intended for?</CHECKME>
               </relation>
               
-                
+                -->
                 <relation ID="personSucceededPerson">
                 <sourceClass target="Person">
                   <arity>0-n</arity>
@@ -559,18 +634,8 @@
                 <reverseName>was ordained by</reverseName>
               </relation>
        
-                <relation ID="personWasUncleOfPerson">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>was uncle of</name>
-                <reverseName>had as uncle</reverseName>
-              </relation>
-                
-              <relation ID="personWroteTheBiographyOfPerson" status="needs_review" type="implicit">
+
+            <!--  <relation ID="personWroteTheBiographyOfPerson" status="needs_review" type="implicit">
                 <sourceClass target="Person"> 
                   <arity>0-n</arity>
                 </sourceClass>
@@ -582,9 +647,7 @@
                   <note>This is a shortcut for <path><relName target="personWroteWork"/>. <relName target="workHasSubject"/></path></note>
                   <CHECKME who="DS" when="2022-05-05" status="new">This seems a bit too specific as a general relation, doesn't it?</CHECKME>
               </relation>
-  
-               
-              
+            -->
                 
                 <relation ID="PersonQuotesPerson" type="implicit">
                     <sourceClass target="Person">
