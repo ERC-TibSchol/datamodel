@@ -256,7 +256,7 @@
                     <CHECKME who="DS" when="2022-05-05" status="new">needs discussion</CHECKME>
                 </property>
             </properties>
-            
+
             <relations>
                 <relation ID="personWroteWork">
                     <sourceClass target="Person">
@@ -303,10 +303,7 @@
                         <reverseName>had sibling</reverseName>
                         <CHECKME who="DS" when="2022-05-06" status="new">Shouldn't this be implicit by common parents?</CHECKME>
                     </relation>
-                
-                
-                
-                
+                                           
                     <relation ID="PersonWasNephewOfPerson">
                         <sourceClass target="Person">
                             <arity>0-n</arity>
