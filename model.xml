@@ -20,16 +20,23 @@
                 <name>Saranya Balasubramanian</name>
             </person>
         </contributor>
+        <contributor role="author">
+            <person ID="PH">
+                <name>Pascale Hugon</name>
+            </person>
+        </contributor>
+        <!--TODO PH question: what is rol "principle"?-->
         <contributor role="principle">
             <person ID="PH">
                 <name>Pascale Hugon</name>
             </person>
         </contributor>
-        <version>0.1</version>
+        <version>0.2</version>
         <changelog>
             <change status="draft" when="2022-04-28" who="DS">set up document</change>
             <change status="draft" when="2022-05-06" who="DS">adding relations from APIS_Entities -List of Relations.xlsx</change>
             <change status="draft" when="2023-08-31" who="PH">Update descriptions</change>
+            <change status="draft" when="2023-09-01" who="PH">Update model to match current</change>
         </changelog>
         <audience>EXTERNAL</audience>
         <namespaces>
@@ -39,77 +46,91 @@
     <description><p>This is the overall data model for the project TibSchol - The Dawn of Tibetan Buddhist Scholasticism (11th-13th c.). This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 101001002).</p></description>
     <classes>
         
-        <class ID="Manuscript">
-            <name>Manuscript</name>
+        <class ID="Instance">
+            <name>Instance</name>
             <definition>
-                <p>A version of a given <className>Work</className> instantiated in writing in a physical object (manuscript, blockprint, book, etc.), which may or not be extant.</p>
+                <p>A version of a given <className>Work</className> instantiated in writing in a physical object (manuscript, blockprint, book, etc.), which may or may not be extant.</p>
             </definition>
             
-            
             <properties>
-                <property ID="instance.identifier">
+                <property ID="instance.attributes">
                     <arity>1</arity>
-                    <name>Identifier(s)</name>
+                    <name>Attributes</name>
                     <datatypeName target="shortText"/>
-                    <note>the identifier(s) of the instance, e.g., signature on the manuscript, catalogue number, TibSchol number</note>
+                    <note>Attributes of Instance-entities are: the identifier(s) of the instance (e.g., signature on the Instance, catalogue number, TibSchol number); the title (identical to the name of the <className target="Work">Work</className>); the source (bibliographical reference for the instance itself or a physical or digital copy of the original physical object); external link(s) (e.g., to BUDA https://library.bdrc.io/, which provides a link to digital images); length (number of folios); indication of proofreading by scribe or reader. A free field for comments records pertinent features of the <className target="Instance">Instance</className> not included in the set attribute fields.</note>
                 </property>
-                <property ID="instance.source">
-                    <arity>1</arity>
-                    <name>Source</name>
-                    <datatypeName target="shortText"/>
-                    <note>bibliographical reference for the instance itself or a physical or digital copy of the physical object</note>
-                </property>
-            </properties>
+          </properties>
 
             <relations>
-                <relation ID="InstancecopyInstance">
-                    <sourceClass target="Manuscript">
-                        <arity>1-n</arity>
-                    </sourceClass>
-                    <targetClass target="Manuscript">
-                        <arity>1-n</arity>
-                    </targetClass>
-                    <name>copied from</name>
-                    <reverseName>is source for</reverseName>
-                </relation>
-                <relation ID="InstancetoPerson">
-                    <sourceClass target="Manuscript">
-                        <arity>1-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>1-n</arity>
-                    </targetClass>
-                    <name>owned by/copied by</name>
-                    <reverseName>is owner of/is scribe of</reverseName>
-                </relation>
-                <relation ID="manuscripttransmitsWork">
-                    <sourceClass target="Manuscript">
+                <note>An <className target="Instance">Instance</className> is an instance of a specific <className target="Work">Work</className>and can be related to another <className target="Instance">Instance</className>; to a <className target="Person">Person</className>; to a <className target="Place">location (Place)</className></note>
+
+                <relation ID="InstanceToWork">
+                    <sourceClass target="Instance">
                         <arity>1-n</arity>
                     </sourceClass>
                     <targetClass target="Work">
                         <arity>1-n</arity>
                     </targetClass>
-                    <name>transmits</name>
-                    <reverseName>is transmitted in</reverseName>
+                    <name>instance of</name>
+                    <reverseName>has as an instance</reverseName>
                     <properties>
-                        <property ID="manuscripttransmitsWork.locus">
+                        <property ID="InstanceToWork.locus">
                             <arity>1</arity>
                             <name>locus</name>
                             <datatypeName target="shortText"/>
                         </property>
+                        <!--TODO Ph question: what is this locus?-->
                     </properties>
+                    <note>A <className target="Work">Work</className>is transmitted in one or several <className target="Instance">Instances</className>.</note>
+                </relation>
+
+                <relation ID="InstanceToInstance">
+                    <sourceClass target="Instance">
+                        <arity>1-n</arity>
+                    </sourceClass>
+                    <targetClass target="Instance">
+                        <arity>1-n</arity>
+                    </targetClass>
+                    <name>has as source</name>
+                    <reverseName>is source for</reverseName>
+                <note>When a manuscript instances indicates that it was copied from another manuscript instance (or instances). When a book instances indicates that it is based on a manuscript instance (or instances). When a blockprint indicate the manuscript(s) considered for the carving blocks.</note>
+                </relation>
+
+                <relation ID="InstancetoPerson">
+                    <sourceClass target="Instance">
+                        <arity>1-n</arity>
+                    </sourceClass>
+                    <targetClass target="Person">
+                        <arity>1-n</arity>
+                    </targetClass>
+                    <name>owned by/copied by, etc.</name>
+                    <reverseName>is owner of/is scribe of, etc.</reverseName>
+                    <note>The main relations considered are of manuscript instances being owned by a particular person, or having been written down or copied by a particular person. Other Instance to Person relations include cases when a person sponsored the making of an instance, illustrated an instance, or edited an instance.</note>
                 </relation>
                 
-                <relation ID="manuscriptHasFulltextRepresentation">
-                    <sourceClass target="Manuscript">
+                <relation ID="InstancetoPlace">
+                    <sourceClass target="Instance">
+                        <arity>1-n</arity>
+                    </sourceClass>
+                    <targetClass target="Place">
+                        <arity>1-n</arity>
+                    </targetClass>
+                    <name>copied/written down at</name>
+                    <reverseName>place of scribing for</reverseName>
+                    <note>This relation applies to manuscript instances exclusively. Actual location of the instance is provided by the "source"-attribute of the instance.</note>
+                </relation>
+                
+                <relation ID="InstanceTextRepresentation">
+                    <sourceClass target="Instance">
                         <arity>1</arity>
                     </sourceClass>
                     <targetClass target="TEIdocument">
                         <arity>1</arity>
                     </targetClass>
-                    <name>has fulltext representation</name>
-                    <reverseName>is fulltext representation of</reverseName>
+                    <name>has text transliteration in</name>
+                    <reverseName>is text transliteration of</reverseName>
                 </relation>
+                <note>The content of the Work as represented in the Instance is transliterated, in part or in full, in a TEI document, using Wylie transliteration system that renders Tibetan script in Roman alphabet.</note>
             </relations>
             
             <mapping targetLanguage="bibframe">
@@ -126,23 +147,11 @@
             </definition>
             
             <properties>
-                <property ID="work.name">
+                <property ID="work.attributes">
                     <arity>1</arity>
                     <name>Name(s)</name>
                     <datatypeName target="shortText"/>
-                    <note>the title of the work, other alternative titles</note>
-                </property>
-                <property ID="work.subject">
-                    <arity>1</arity>
-                    <name>Subject</name>
-                    <datatypeName target="shortText"/>
-                    <note>the general subject of the work</note>
-                </property>
-                <property ID="work.date">
-                    <arity>1</arity>
-                    <name>Date</name>
-                    <datatypeName target="shortText"/>
-                    <note>the date the work was composed, when known. By default, between the date of the author's birth +10 and the year of the author's date.</note>
+                    <note>Attributes of a Work are its name (title and alternative titles, including in other languages); subject (what the work is about, from a category list); date (the date it was composed, when known, or between the date of the author's birth +10 and the year of the author's date, if author's dates are known); external link(s) (e.g., to BUDA https://library.bdrc.io/, which records additional instances). A free field for comments records pertinent features of the <className target="Work">Work</className> not included in the set attribute fields.</note>
                 </property>
             </properties>     
              
@@ -751,7 +760,7 @@
         <class ID="Instance">
             <name>Instance</name>
             <definition>Resource reflecting an individual, material embodiment of a Work.</definition>
-            <CHECKME who="DS" when="2022-05-05" status="new">I'm not too thrilled with the introduction of Instance in the model because the definition is too attached to the "library" way of thinking about books: the "individual, material embodiment" is in the case of the TibSchol model really the <className>Manuscript</className> (or a part within it). If we want to record the fact that several manuscripts transmit the same "version" of a work, this would not be on the material but on the intellectual level.</CHECKME>
+            <CHECKME who="DS" when="2022-05-05" status="new">I'm not too thrilled with the introduction of Instance in the model because the definition is too attached to the "library" way of thinking about books: the "individual, material embodiment" is in the case of the TibSchol model really the <className>Instance</className> (or a part within it). If we want to record the fact that several Instances transmit the same "version" of a work, this would not be on the material but on the intellectual level.</CHECKME>
             <mapping targetLanguage="bibframe">
                 <className uri="https://id.loc.gov/ontologies/bibframe/Instance.rdf">bibframe:Instance</className>
             </mapping>
@@ -773,7 +782,7 @@
                     <sourceClass target="Excerpt">
                         <arity>0-n</arity>
                     </sourceClass>
-                    <targetClass target="Manuscript">
+                    <targetClass target="Instance">
                         <arity>1</arity>
                     </targetClass>
                     <name>is part of</name>
@@ -894,7 +903,7 @@
                     <item>scribe</item>
                 </list>
             </values>
-            <CHECKME who="DS" when="2022-05-04" status="new">I think this should be moved to Person-Work and Person-Manuscript relations. What is 'editor' (contemporary?)</CHECKME>
+            <CHECKME who="DS" when="2022-05-04" status="new">I think this should be moved to Person-Work and Person-Instance relations. What is 'editor' (contemporary?)</CHECKME>
         </vocab>
     </vocabularies>
     <datatypes>
