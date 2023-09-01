@@ -49,7 +49,7 @@
         <class ID="Instance">
             <name>Instance</name>
             <definition>
-                <p>A version of a given <className>Work</className> instantiated in writing in a physical object (manuscript, blockprint, book, etc.), which may or may not be extant.</p>
+                <p>A version of a given <className>Work</className> reflected in an individual, material embodiment, notably, instantiated in writing in a physical object (manuscript, blockprint, book, etc.). Such resource may or may not be extant. In addition to the text representing the Work, and instance may include paratextual elements and extra-textual elements.</p>
             </definition>
             
             <properties>
@@ -81,7 +81,7 @@
                         </property>
                         <!--TODO Ph question: what is this locus?-->
                     </properties>
-                    <note>A <className target="Work">Work</className>is transmitted in one or several <className target="Instance">Instances</className>.</note>
+                    <note>A <className target="Work">Work</className>is transmitted in one or several <className target="Instance">Instances</className>. The project does not deal with Instances for Indian works.</note>
                 </relation>
 
                 <relation ID="InstanceToInstance">
@@ -117,7 +117,7 @@
                     </targetClass>
                     <name>copied/written down at</name>
                     <reverseName>place of scribing for</reverseName>
-                    <note>This relation applies to manuscript instances exclusively. Actual location of the instance is provided by the "source"-attribute of the instance.</note>
+                    <note>This relation applies to manuscript instances exclusively. Actual location of the instance is provided by the "source"-attribute of the instance. When Instance is linked to Place, the scribe-Person is also linked to Place.</note>
                 </relation>
                 
                 <relation ID="InstanceTextRepresentation">
@@ -130,14 +130,18 @@
                     <name>has text transliteration in</name>
                     <reverseName>is text transliteration of</reverseName>
                 </relation>
-                <note>The content of the Work as represented in the Instance is transliterated, in part or in full, in a TEI document, using Wylie transliteration system that renders Tibetan script in Roman alphabet.</note>
+                <note>The content of the Work as represented in the Instance is transliterated, in part or in full, in a TEI document, using Wylie transliteration system that renders Tibetan script in Roman alphabet. When several Instance of a work are extant, a single TEI records the variant readings between them. The TEI document also records (fully or partially) paratextual and extra-textual elements present in the Instance. Note: "Instance to TEI document" is is not a Relation in the database.</note>
+                <!--TODO ph: in the graphic representation, can this relation be represented differently than the relations between entities?-->
             </relations>
             
             <mapping targetLanguage="bibframe">
                 <className uri="https://id.loc.gov/ontologies/bibframe/Item.rdf">bibframe:Item</className>
                 <note>Cf. Bibframe definition: "Single example of an Instance" – Instance </note>
             </mapping>
-            
+            <mapping targetLanguage="bibframe">
+                <className uri="https://id.loc.gov/ontologies/bibframe/Instance.rdf">bibframe:Instance</className>
+            </mapping>
+            <!--TODO Ph: I don't know about the mapping with bibframe-->            
         </class>
         
         <class ID="Work">
@@ -149,14 +153,15 @@
             <properties>
                 <property ID="work.attributes">
                     <arity>1</arity>
-                    <name>Name(s)</name>
+                    <name>Attributes</name>
                     <datatypeName target="shortText"/>
-                    <note>Attributes of a Work are its name (title and alternative titles, including in other languages); subject (what the work is about, from a category list); date (the date it was composed, when known, or between the date of the author's birth +10 and the year of the author's date, if author's dates are known); external link(s) (e.g., to BUDA https://library.bdrc.io/, which records additional instances). A free field for comments records pertinent features of the <className target="Work">Work</className> not included in the set attribute fields.</note>
+                    <note>Attributes of a <className target="Work">Work</className> are its name (title and alternative titles, including in other languages); subject (what the work is about, from a category list); date (the date it was composed, when known, or between the date of the author's birth +10 and the year of the author's date, if author's dates are known); external link(s) (e.g., to BUDA https://library.bdrc.io/, which records additional instances, to rKTs http://www.rkts.org/ for Indian works). A free field for comments records pertinent features of the <className target="Work">Work</className> not included in the set attribute fields. For Indian Works (for which Instances are not considered), the reference number of the sDe dge canon is provided.</note>
                 </property>
             </properties>     
              
             <relations>
-                <relation ID="WorkCommentaryWork">
+                <note>Works can be related to persons (see "PersonToWork"), to places, and to other works. They are transmitted in one or several instances (see "InstanceToWork").</note>
+                <relation ID="WorkToWork">
                     <sourceClass target="Work">
                         <arity>1-n</arity>
                     </sourceClass>
@@ -165,109 +170,78 @@
                     </targetClass>
                     <name>commentary on</name>
                     <reverseName>has as commentary</reverseName>
+                    <note>The notion of "commentary" encompasses several Tibetan genra, including topical outlines (the Tibetan genre known as "bsdus don" or "don bsdus"). Other types of WorkToWork relations, such as a Work re-using parts of another Work (in the form of quotation or silent reuse), are in the database but not implemented at this stage of the project.</note>
+                </relation>
 
-                <relation ID="WorkQuotesWork" type="abstract">
+                <relation ID="WorkToPlace">
                     <sourceClass target="Work">
                         <arity>1-n</arity>
                     </sourceClass>
-                    <targetClass target="Work">
+                    <targetClass target="Place">
                         <arity>1-n</arity>
                     </targetClass>
-                    <name>quotes</name>
-                    <reverseName>is quoted by</reverseName>
-                    <note>This is a generalization of any "WorkQuotesWork" relation. Such a relation can either be added by hand in APIS or </note>
-                    <properties>
-                        <property ID="WorkQuotesWork.curationMode">
-                            <arity>0-1</arity>
-                            <name>Curation Mode</name>
-                            <datatypeName target="vocabTerm" vocabRef="vocab.curationModes"/>
-                            <note>differentiate between relations added by hand in APIS or imported from a TEI source</note>
-                        </property>
-                        
-                        <property ID="WorkQuotesWork.provenance">
-                            <arity>0-1</arity>
-                            <name>Provenience</name>
-                            <datatypeName target="shortText"/>
-                            <note>The identifier of the excerpt where this relation was extracted from.</note>
-                        </property>
-                    </properties>
+                    <name>composed at</name>
+                    <reverseName>place of composition of</reverseName>
+                    <note>Work was composed by author in a specified location. When Work is linked to Place, the author-person is also linked to that Place.</note>
                 </relation>
-                
-                <relation ID="WorkQuotesDirectlyWork" parent="WorkQuotesWork">
-                    <sourceClass target="Work">
+            </relations>
+        </class>
+
+        <class ID="Place">
+            <name>Place</name>
+            <definition>Any kind of location.</definition>
+            <note>The project focuses on real locations situated within the human realm. These are e.g., countries, regions, towns and villages, as well as monasteries.</note>
+            <properties>
+                <property ID="place.attributes">
+                    <arity>1</arity>
+                    <name>Attributes</name>
+                    <datatypeName target="shortText"/>
+                    <note>Attributes of Places are: name (and alternative names); GPS coordinates; external link. A free field for comments records pertinent features of the <className target="Place">Place</className> not included in the set attribute fields.</note>
+                </property>
+            </properties>
+            <relations>
+                <note>A Place can be related to another <className target="Place">Place</className>, to a Work (see "WorkToPlace"), to an Instance (see "InstanceToPlace"), or to a Person (see "PersonToPlace")</note>
+                <relation ID="PlaceToPlace">
+                    <sourceClass target="Place">
                         <arity>1-n</arity>
                     </sourceClass>
-                    <targetClass target="Work">
+                    <targetClass target="Place">
                         <arity>1-n</arity>
                     </targetClass>
-                    <name>quotes directly</name>
-                    <reverseName>is quoted directly by</reverseName>
-                    <definition>This relation means that Work A explicitly quotes Work B, providing some kind of reference to in the text (the quoted work's title or a paraphrase of it).</definition>
-                    <CHECKME status="new" when="2022-05-09" who="PH">check definition</CHECKME>
-                </relation>
-                <relation ID="WorkQuotesIndirectlyWork" parent="WorkQuotesWork">
-                    <sourceClass target="Work">
-                        <arity>1-n</arity>
-                    </sourceClass>
-                    <targetClass target="Work">
-                        <arity>1-n</arity>
-                    </targetClass>
-                    <name>quotes indirectly</name>
-                    <reverseName>is quoted indirectly by</reverseName>
-                    <definition>This relation means that Work A implicitly quotes Work B witout making the exact source explicit,</definition>
-                    <CHECKME status="new" when="2022-05-09" who="PH">check definition</CHECKME>
-                </relation>
-                
-                <relation ID="workHasSubject">
-                    <sourceClass target="Work">
-                        <arity>1-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person Work Place">
-                        <arity>1-n</arity>
-                    </targetClass>
-                    <name>has subject</name>
-                    <reverseName>is subject of</reverseName>
-                    <CHECKME who="DS" when="2022-05-05" status="new">How do we deal with Topics? Should we make this a property backed by a controlled vocabulary or an entity?</CHECKME>
+                    <name>is located within</name>
+                    <reverseName>contains</reverseName>
+                    <note>To express the inclusion of a given location within a larger location.</note>
                 </relation>
             </relations>
         </class>
         
         <class ID="Person">
             <name>Person</name>
-            <definition>Any person in the domain, independent of its role. The notion of person includes human beings as well as Buddhas and Bodhisattvas.</definition>
+            <definition>Any person in the domain, independent of its role. The notion of Person includes human beings as well as Buddhas and Bodhisattvas.</definition>
             <properties>
-                <property ID="person.name">
+                <property ID="person.attributes">
                     <arity>1</arity>
-                    <name>Name(s)</name>
+                    <name>Attributes</name>
                     <datatypeName target="shortText"/>
-                    <note>Name of the person and alternative names, including in other languages.</note>
-                </property>
-                <property ID="person.link">
-                    <arity>0-1</arity>
-                    <name>link</name>
-                    <datatypeName target="uri"/>
-                    <note>Link to external resources providing information about that person, such as https://library.bdrc.io/</note>
-                    <CHECKME who="DS" when="2022-05-04" status="new">I suppose, this could be moved to a general LOD references field?</CHECKME>
-                </property>
-                <property ID="person.dates">
-                    <arity>0-1</arity>
-                    <name>Dates</name>
-                    <datatypeName target="year"/>
-                    <note>Year of birth, of death, floruit (exact or approximation to be mapped to a date range). </note>
-                </property>
-                
-                </property> 
-                <property ID="person.type">
-                    <arity>1</arity>
-                    <name>Person Type</name>
-                    <note>Gender, nationality, monastic/lay status. </note>
-                    <datatypeName target="vocabTerm" vocabRef="vocab.personTypes"/>
-                    <CHECKME who="DS" when="2022-05-05" status="new">needs discussion</CHECKME>
+                    <note>Attributes of a Person include: name (the name of the person and alternative names and titles, including in other languages); dates (birth, death, floruit - exact or approximation to be mapped to a date range); type (gender, nationality, monastic/lay status); external link (link to external resources providing information about that person, such as BUDA https://library.bdrc.io/). A free field for comments records pertinent features of the <className target="Person">Person</className> not included in the set attribute fields.</note>
                 </property>
             </properties>
 
             <relations>
-                <relation ID="personWroteWork">
+                <note>A <className target="Person">Person</className> can be connected to a Place, a Work, an Instance (see "InstanceToPerson"), and other Persons.</note>
+                <relation ID="PersonToPlace">
+                    <sourceClass target="Person">
+                        <arity>1-n</arity>
+                    </sourceClass>
+                    <targetClass target="Place">
+                        <arity>1-n</arity>
+                    </targetClass>
+                    <name>active at</name>
+                    <reverseName>place of activity of</reverseName>
+                    <note>The period of activity is indicated in a comment field. Activities can consist, for instance, in being abbot of a monastery, teaching or studying in a location, composing a work, copying a manuscript, being born, die, or reside in a place.</note>
+                </relation>
+
+                <relation ID="PersonToWork">
                     <sourceClass target="Person">
                         <arity>0-n</arity>
                     </sourceClass>
@@ -275,528 +249,68 @@
                         <arity>0-n</arity>
                     </targetClass>
                     <name>is author of</name>
-                    <reverseName>has author</reverseName>
+                    <reverseName>authored by</reverseName>
+                    <note>Other Person-Work relations are for a Person requesting a Work to be composed, a Person sponsoring its composition, for Persons having their teaching recorded in a Work (the person recording the teaching qualifies as the author), and for addressee of the Work.</note>
                 </relation>
               
-              
-                <relation ID="PersonWasFatherOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-1</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Father Of</name>
-                    <reverseName>Was Child Of</reverseName>
-                </relation>
-                
-                <relation ID="PersonWasMotherOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-1</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Mother Of</name>
-                    <reverseName>Was Child Of</reverseName>
-                </relation>
-                
-                    <relation ID="PersonWassiblingOfPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was sibling of</name>
-                        <reverseName>had sibling</reverseName>
-                        <CHECKME who="DS" when="2022-05-06" status="new">Shouldn't this be implicit by common parents?</CHECKME>
-                    </relation>
-                                           
-                    <relation ID="PersonWasNephewOfPerson">
-                        <sourceClass target="Person">
-                            <arity>0-n</arity>
-                        </sourceClass>
-                        <targetClass target="Person">
-                            <arity>0-n</arity>
-                        </targetClass>
-                        <name>was nephew of</name>
-                        <reverseName>had nephew</reverseName>
-                        <CHECKME who="DS" when="2022-05-06" status="new">Shouldn't this be implicit by <relName target="PersonWasUncleOfPerson"/> or <relName target="PersonWasAuntOfPerson"/> ?</CHECKME>
-                    </relation>
-                    
-                <relation ID="PersonWasUncleOfPerson">
+                <relation ID="PersonToPerson">
                     <sourceClass target="Person">
                         <arity>0-n</arity>
                     </sourceClass>
                     <targetClass target="Person">
                         <arity>0-n</arity>
                     </targetClass>
-                    <name>Was Uncle Of</name>
-                    <reverseName>Had Uncle</reverseName>
+                    <name>personal/intellectual relation to</name>
+                    <reverseName>personal/intellectual relation to</reverseName>
+                    <note>Person-Person relations include a set of personal relations, with a focus on relations that may support transfer of knowledge (teacher/student, predecessor/successor in lineage, aunt-uncle/nephew, mother-father/child, etc.) and a set of intellectual relations (currently only considering a Person quoting the views of another Person, with or without mentioning their name). When the relation has a known specific duration or time, this is indicated in a comment field. When it has a known location, this is indicated in a comment field, and the two Persons are linked with the given Place.</note>
                 </relation>
+             </relations>
                 
-                    
-                    
-                <relation ID="PersonWasAuntOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Aunt Of</name>
-                    <reverseName>Had Aunt</reverseName>
-                </relation>
-                <relation ID="PersonWasCousinOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Cousin Of</name>
-                    <reverseName>Was Cousin Of</reverseName>
-                </relation>
-                
-                    
-                <relation ID="PersonWasFellowMemberOfClanWithPerson">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Fellow Member Of Clan With</name>
-                    <reverseName>Was Fellow Member Of Clan With</reverseName>
-                    <CHECKME who="DS" when="2022-05-06" status="new">Does this relate clan members one to each other? If yes, this should probably be impliced via <path><relName target="PersonWasMemberOfOrganization"/> <className target="Organization"/> <propName target="organization.type"/>="clan"</path></CHECKME>
-                </relation>
-                
-                
-                <relation ID="PersonWasStudentOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Student Of</name>
-                    <reverseName>Was Teacher Of</reverseName>
-                    <properties>
-                        <property ID="personWasStudentOfPerson.begin">
-                            <arity>0-1</arity>
-                            <name>begin</name>
-                            <datatypeName target="year"/>
-                        </property>
-                        <property ID="personWasStudentOfPerson.end">
-                            <arity>0-1</arity>
-                            <name>end</name>
-                            <datatypeName target="year"/>
-                        </property>
-                    </properties>
-                </relation>
-                <relation ID="PersonWasDiscipleOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Disciple Of</name>
-                    <reverseName>Was Spiritual Teacher Of</reverseName>
-                    <properties>
-                        <property ID="personWasDiscipleOfPerson.begin">
-                            <arity>0-1</arity>
-                            <name>begin</name>
-                            <datatypeName target="year"/>
-                        </property>
-                        <property ID="personWasDiscipleOfPerson.end">
-                            <arity>0-1</arity>
-                            <name>end</name>
-                            <datatypeName target="year"/>
-                        </property>
-                    </properties>
-                </relation>
-                
-                <relation ID="PersonWasSpiritualFriendOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Spiritual Friend Of</name>
-                    <reverseName>Had As Spiritual Friend</reverseName>
-                    <properties>
-                        <property ID="personWasSpiritualFriendOfPerson.begin">
-                            <arity>0-1</arity>
-                            <name>begin</name>
-                            <datatypeName target="year"/>
-                        </property>
-                        <property ID="personWasSpiritualFriendOfPerson.end">
-                            <arity>0-1</arity>
-                            <name>end</name>
-                            <datatypeName target="year"/>
-                        </property>
-                    </properties>
-                </relation>
-                
-                
-                <relation ID="PersonWasFllowStudentOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Fllow Student Of</name>
-                    <reverseName>Was Fellow Student Of</reverseName>
-                    <CHECKME who="DS" when="2022-05-06" status="new">shouldn't be implicit by two <relName target="PersonWasStudentOfPerson"/> within an overlapping time range?</CHECKME>
-                    <properties>
-                        <property ID="personWasFllowStudentOfPerson.begin">
-                            <arity>0-1</arity>
-                            <name>begin</name>
-                            <datatypeName target="year"/>
-                        </property>
-                        <property ID="personWasFllowStudentOfPerson.end">
-                            <arity>0-1</arity>
-                            <name>end</name>
-                            <datatypeName target="year"/>
-                        </property>
-                    </properties>
-                </relation>
-                    
-                <relation ID="PersonWasPatronOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Patron Of</name>
-                    <reverseName>Had Patron</reverseName>
-                    <properties>
-                        <property ID="personWasPatronOfPerson.begin">
-                            <arity>0-1</arity>
-                            <name>begin</name>
-                            <datatypeName target="year"/>
-                        </property>
-                        <property ID="personWasPatronOfPerson.end">
-                            <arity>0-1</arity>
-                            <name>end</name>
-                            <datatypeName target="year"/>
-                        </property>
-                    </properties>
-                </relation>
-                <relation ID="PersonWasFriendFellowMonkOfPerson">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>Was Friend/Fellow Monk Of</name>
-                    <reverseName>Was Friend/Fellow Monk Of</reverseName>
-                    <note>This is a shortcut for <path><instanceName classRef="Person">A</instanceName>, <instanceName classRef="Person">B</instanceName> <relName target="PersonWasMemberOfOrganization">was member of</relName> <instanceName classRef="Organization">monastary M</instanceName><propName target="organization.type">="monastery"</propName></path></note>
-                    <properties>
-                        <property ID="personWasFriendFellowMonkOfPerson.begin">
-                            <arity>0-1</arity>
-                            <name>begin</name>
-                            <datatypeName target="year"/>
-                        </property> 
-                        <property ID="personWasFriendFellowMonkOfPerson.end">
-                            <arity>0-1</arity>
-                            <name>end</name>
-                            <datatypeName target="year"/>
-                        </property>
-                    </properties>
-                </relation>
-                
-                
-                
-                <relation ID="PersonWasMemberOfOrganization">
-                    <sourceClass target="Person">
-                        <arity>1-n</arity>
-                    </sourceClass>
-                    <targetClass target="Organization">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>was member of</name>
-                    <reverseName>had members</reverseName>
-                    <properties>
-                        <property ID="PersonWasMemberOfOrganization.begin">
-                            <arity>0-1</arity>
-                            <name>begin</name>
-                            <datatypeName target="year"/>
-                        </property>
-                        <property ID="PersonWasMemberOfOrganization.end">
-                            <arity>0-1</arity>
-                            <name>end</name>
-                            <datatypeName target="year"/>
-                        </property>
-                    </properties>
-                </relation>
-               
-             
-              <!--<relation ID="personlistenedtotheteachingsofPerson" status="needs_review">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>listened to the teachings of</name>
-                <reverseName>had listened to the teachings of</reverseName>
-              </relation>-->
-                
-                
-              <relation ID="personmeetsPerson" status="needs_review">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>met</name>
-                <reverseName>met</reverseName>
-                <CHECKME who="DS" when="2022-05-05" status="new">Probably we want to attach the <className>place</className> of the meeting, so we should introduce an <className>Event</className> reprenting the meeting: <path><instanceName classRef="Person">A</instanceName>, <instanceName classRef="Person">B</instanceName> <relName target="personParticipatedInEvent">participated in</relName> <instanceName classRef="Event">meeting</instanceName>; <relName target="eventTookPlaceAt"/></path>.</CHECKME>
-              </relation>
-                
-              <!--<relation ID="personorderstopreparethexylographeditiontoPerson" status="needs_review">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>orders to prepare the xylograph edition to</name>
-                <reverseName>had orders to prepare the xylograph edition to</reverseName>
-              </relation>
-                
-                
-              <relation ID="personparticipatedtogetheratRtseldereligiouscouncilPerson" status="needs_review">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>participated together at Rtse lde religious council</name>
-                <reverseName>participated together at Rtse lde religious council</reverseName>
-                  <CHECKME who="DS" when="2022-05-05" status="new">This should be generalized to <path><instanceName classRef="Person">A</instanceName>, <instanceName classRef="Person">B</instanceName> <relName target="personParticipatedInEvent">participated in</relName> <instanceName classRef="Event">Rtse lde religious council</instanceName></path></CHECKME>
-              </relation>
-              -->  
-                <relation ID="personParticipatedInEvent">
-                    <sourceClass target="Person">
-                        <arity>1-n</arity>
-                    </sourceClass>
-                    <targetClass target="Organization Event">
-                        <arity>1-n</arity>
-                    </targetClass>
-                    <name>participated in</name>
-                    <reverseName>had participants</reverseName>
-                </relation>
-                
-                <!--<relation ID="personpreparesthexylographeditionundertheordertoPerson">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>prepares the xylograph edition under the order to</name>
-                <reverseName>had prepares the xylograph edition under the order to</reverseName>
-                    <CHECKME who="DS" when="2022-05-05" status="new">what is this used for?</CHECKME>
-              </relation>
-                
-                
-              <relation ID="personPromptedPerson">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>prompted</name>
-                <reverseName>was prompted by</reverseName>
-              </relation>
-              
-                <relation ID="personWasKinsmanOfPerson">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>was kinsman of</name>
-                <reverseName>had kinsman</reverseName>
-              </relation>
-                
-                
-              <relation ID="personstudentofPerson">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>student of</name>
-                <reverseName>had student of</reverseName>
-              </relation>
-       
-              
-              <relation ID="personWasCotranslatorWithPerson" status="needs_review">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>was co-translator with</name>
-                <reverseName>had co-translator</reverseName>
-                  <CHECKME who="DS" when="2022-05-05" status="new">I'm not sure what this is intended for?</CHECKME>
-              </relation>
-              
-                -->
-                <relation ID="personSucceededPerson">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>succeeded</name>
-                <reverseName>was succeeded by</reverseName>
-              </relation>
-              
-              <relation ID="personWorkedWithPerson">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>worked with</name>
-                <reverseName>worked with</reverseName>
-              </relation>
-          
-           
-                <relation ID="personOrdainedPerson">
-                <sourceClass target="Person">
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>ordained</name>
-                <reverseName>was ordained by</reverseName>
-              </relation>
-       
-
-            <!--  <relation ID="personWroteTheBiographyOfPerson" status="needs_review" type="implicit">
-                <sourceClass target="Person"> 
-                  <arity>0-n</arity>
-                </sourceClass>
-                <targetClass target="Person">
-                  <arity>0-n</arity>
-                </targetClass>
-                <name>wrote the biography of</name>
-                <reverseName>had biography written by</reverseName>
-                  <note>This is a shortcut for <path><relName target="personWroteWork"/>. <relName target="workHasSubject"/></path></note>
-                  <CHECKME who="DS" when="2022-05-05" status="new">This seems a bit too specific as a general relation, doesn't it?</CHECKME>
-              </relation>
-            -->
-                
-                <relation ID="PersonQuotesPerson" type="implicit">
-                    <sourceClass target="Person">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Person">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>quotes</name>
-                    <reverseName>is quoted by</reverseName>
-                    <note>This is a shortcut for <path><relName target="personWroteWork"/> <relName target="WorkQuotesWork"/> <relName target="personWroteWork"/></path></note>
-                </relation>
-            </relations>
             <mapping targetLanguage="bibframe">
                 <className uri="https://id.loc.gov/ontologies/bibframe/Person.rdf">bibframe:Person</className>
             </mapping>
         </class>
-        
-        <class ID="Organization">
-            <name>Organization</name>
-            <definition>Any group of <className target="Person">persons</className> with some level of formalized organization – from a community to an institution.</definition>
-            <examples>
-                <example>an abbey</example>
-                <example>a council</example>
-            </examples>
-            <properties>
-                <property ID="organization.name">
-                    <arity>1</arity>
-                    <name>Name</name>
-                    <datatypeName target="shortText"/>
-                </property>
-                <property ID="organization.type">
-                    <arity>1-n</arity>
-                    <name>Organization Type</name>
-                    <datatypeName target="vocabTerm" vocabRef="vocab.organizationTypes"/>
-                </property>
-            </properties>
-            <relations>
-                <relation ID="organizationLocatedInPlace">
-                    <sourceClass target="Organization">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Place">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>was located in</name>
-                    <reverseName>was location of</reverseName>
-                </relation>
-            </relations>
-        </class>
-        
-        <class ID="Instance">
-            <name>Instance</name>
-            <definition>Resource reflecting an individual, material embodiment of a Work.</definition>
-            <CHECKME who="DS" when="2022-05-05" status="new">I'm not too thrilled with the introduction of Instance in the model because the definition is too attached to the "library" way of thinking about books: the "individual, material embodiment" is in the case of the TibSchol model really the <className>Instance</className> (or a part within it). If we want to record the fact that several Instances transmit the same "version" of a work, this would not be on the material but on the intellectual level.</CHECKME>
-            <mapping targetLanguage="bibframe">
-                <className uri="https://id.loc.gov/ontologies/bibframe/Instance.rdf">bibframe:Instance</className>
-            </mapping>
-        </class>
-        
+                
         <class ID="Excerpt">
             <name>Excerpt</name>
-            <definition>An excerpt from an <className>Instance</className>.</definition>
+            <definition>A textual passage represented in an <className>Instance</className>.</definition>
+          
             <properties>
                 <property ID="Identifier">
                     <arity>1</arity>
                     <name>Identifier</name>
                     <datatypeName target="Identifier"/>
-                    <note>the identifer of the excerpt as it is provided by the TEI document</note>
+                    <note>The identifier of the excerpt as it is provided in the TEI document.</note>
+                </property>
+                <property ID="excerpt.attribute">
+                    <arity>1</arity>
+                    <name>Attribute</name>
+                    <datatypeName target="Attribute"/>
+                    <note>Attributes of excerpts in the TEI document include the status (unreviewed to finalized) and a topic (what an excerpt is about - controlled vocabulary).</note>
                 </property>
             </properties>
             <relations>
-                <relation ID="excerptIsPartOf">
+                <relation ID="excerptIsfrom">
                     <sourceClass target="Excerpt">
                         <arity>0-n</arity>
                     </sourceClass>
                     <targetClass target="Instance">
                         <arity>1</arity>
                     </targetClass>
-                    <name>is part of</name>
+                    <name>is from</name>
                     <reverseName>contains</reverseName>
+                <note>An excerpt can include a passage from the Work, a gloss, or other types of paratextual or extra-textual annotations present in the Instance.</note>
                 </relation>
-                <relation ID="excerptIsExtractedFromTEIdocument">
+                <relation ID="excerptIsMarkedupInTEIdocument">
                     <sourceClass target="Excerpt">
                         <arity>1</arity>
                     </sourceClass>
                     <targetClass target="TEIdocument">
                         <arity>1</arity>
                     </targetClass>
-                    <name>is extracted from</name>
-                    <reverseName>is source of</reverseName>
+                    <name>is marked up in</name>
+                    <reverseName>contains</reverseName>
+                    <note>Relevant excerpts are marked up with the tag "seg" in the TEI document.</note>
                 </relation>
             </relations>
         </class>
@@ -814,61 +328,24 @@
                     <arity>1</arity>
                     <name>TEI Document content</name>
                     <datatypeName target="TEIFragment"/>
+                    <note>The TEI consists of a Header section (including information about the Instance extracted from the database), and a partial or complete transliteration of the text (as well as paratext and extra-textual elements), to which tags are added.</note>
                 </property>
                 <property ID="TEIdocument.sourceURI">
                     <arity>1</arity>
                     <name>Source URI</name>
                     <datatypeName target="uri"/>
                     <note>The location of the authoritative version of this document.</note>
+                    <!--TODO Ph: should one indicate the GitHub repository here?-->
                 </property>
             </properties>
         </class>
-        
-        <class ID="Place">
-            <name>Place</name>
-            <definition>any kind of place – fictive or real.</definition>
-            <properties>
-                <property ID="place.name">
-                    <arity>1</arity>
-                    <name>Place Name</name>
-                    <datatypeName target="shortText"/>
-                </property>
-            </properties>
-        </class>
-        
-        <class ID="Event">
-            <name>Event</name>
-            <definition>a </definition>
-            <properties>
-                <property ID="event.begin">
-                    <arity>0-1</arity>
-                    <name>Event Begin</name>
-                    <datatypeName target="year"/>
-                </property>
-                <property ID="event.end">
-                    <arity>0-1</arity>
-                    <name>Event End</name>
-                    <datatypeName target="year"/>
-                </property>
-            </properties>
-            <relations>
-                <relation ID="eventTookPlaceAt">
-                    <sourceClass target="Event">
-                        <arity>1-n</arity>
-                    </sourceClass>
-                    <targetClass target="Place Organization">
-                        <arity>0-n</arity>
-                    </targetClass>
-                    <name>took place in</name>
-                    <reverseName>took place in</reverseName>
-                </relation>
-            </relations>
-        </class>
-        
     </classes>
+
     <relations>
         
     </relations>
+    <!--TODO: should this be removed?-->
+
     <vocabularies>
         <vocab ID="vocab.curationModes">
             <name>Curation Mode Vocabulary</name>
@@ -880,32 +357,10 @@
                     <description><p>the entity, property or relation in question is edited outside of APIS and imported programmatically</p></description>
                 </list>
             </values>
-        </vocab>
-        <vocab ID="vocab.organizationTypes">
-            <name>Organization Types Vocabulary</name>
-            <values>
-                <list>
-                    <item>monastery</item>
-                    <item>clan</item>
-                    <item>court</item>
-                    <item>family</item>
-                </list>
-            </values>
-        </vocab>
-        <vocab ID="vocab.personTypes">
-            <name>Person Types Vocabulary</name>
-            <values>
-                <list>
-                    <item>author</item>
-                    <item>connected person</item>
-                    <item>editor</item>
-                    <item>owner</item>
-                    <item>scribe</item>
-                </list>
-            </values>
-            <CHECKME who="DS" when="2022-05-04" status="new">I think this should be moved to Person-Work and Person-Instance relations. What is 'editor' (contemporary?)</CHECKME>
-        </vocab>
+        </vocab>      
     </vocabularies>
+<!--TODO is this vocabularies section relevant?-->
+
     <datatypes>
         <datatype ID="shortText">
             <name>short text</name>
@@ -932,6 +387,9 @@
             <name>Year</name>
         </datatype>
     </datatypes>
+<!--TODO is this datatypes section relevant?-->
+
+
     <references>
         <reference ID="bibframe">
             <name>Bibframe Version 2.0</name>
