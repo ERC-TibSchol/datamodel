@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: gh_page
-          path: gh_pages
+          path: gh_page
       - name: Checkout modeller
         uses: actions/checkout@v3
         with:
@@ -33,15 +33,15 @@ jobs:
       
       - name: Commit results to gh pages
         run: |
-          cp model.docx gh_pages/
-          cp model.html gh_pages/index.html
-          cd gh_pages
+          cp model.docx gh_page/
+          cp model.html gh_page/index.html
+          cd gh_page
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add *.html
-          git commit -m "New validation results and statistics" -a || true
+          git commit -m "New version of datamodel" -a || true
       - name: Push changes back to GitHub
         uses: ad-m/github-push-action@master
         with:
           branch: gh_page
-          directory: gh_pages
+          directory: gh_page
