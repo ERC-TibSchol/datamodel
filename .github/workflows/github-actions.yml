@@ -43,5 +43,5 @@ jobs:
       - name: Push changes back to GitHub
         uses: ad-m/github-push-action@master
         with:
-          branch: gh_pages
+          branch: gh_page
           directory: gh_pages
