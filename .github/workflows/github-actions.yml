@@ -8,7 +8,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          path: main
+          path: master
       - name: Checkout gh_pages
         uses: actions/checkout@v3
         with:
