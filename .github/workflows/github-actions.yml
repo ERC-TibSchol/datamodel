@@ -9,27 +9,27 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: master
-      # - name: Checkout gh_pages
-      #   uses: actions/checkout@v3
-      #   with:
-      #     ref: gh_page
-      #     path: gh_page
-      - name: Checkout modeller
+      - name: Checkout gh_pages
         uses: actions/checkout@v3
         with:
-          repository: dasch124/modeller
-          path: modeller
-      - name: Get python 3.11
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-          cache: "pipenv"
-      - name: Build
-        run: |
-          python --version
-          python -m pip install pipenv
-          pipenv install
-          pipenv run python modeller.py -a generateDocs -i model.xml
+          ref: gh_page
+          path: gh_page
+      # - name: Checkout modeller
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: dasch124/modeller
+      #     path: modeller
+      # - name: Get python 3.11
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.11'
+      #     cache: "pipenv"
+      # - name: Build
+      #   run: |
+      #     python --version
+      #     python -m pip install pipenv
+      #     pipenv install
+      #     pipenv run python modeller.py -a generateDocs -i model.xml
       
       # - name: Commit results to gh pages
       #   run: |
