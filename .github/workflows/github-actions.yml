@@ -1,5 +1,5 @@
 name: Build html and docx documentation
-on: [workflow_dispatch]
+on: [push]
 jobs:
   build:
     name: Build html and docx documentation
