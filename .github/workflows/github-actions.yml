@@ -30,7 +30,7 @@ jobs:
           python --version
           python -m pip install pipenv
           pipenv install
-          pipenv run python modeller.py -a generateDocs -i model.xml
+          pipenv run python modeller.py -a generateDocs -i ../model.xml
           cp model.docx ../gh-page/
           cp model.html ../gh-page/index.html
           cd ..
