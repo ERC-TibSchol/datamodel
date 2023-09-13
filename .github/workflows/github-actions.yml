@@ -26,15 +26,17 @@ jobs:
           cache: "pipenv"
       - name: Build
         run: |
+          cd modeller
           python --version
           python -m pip install pipenv
           pipenv install
           pipenv run python modeller.py -a generateDocs -i model.xml
+          cp model.docx ../gh-page/
+          cp model.html ../gh-page/index.html
+          cd ..
       
       - name: Commit results to gh pages
         run: |
-          cp model.docx gh-page/
-          cp model.html gh-page/index.html
           cd gh-page
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
