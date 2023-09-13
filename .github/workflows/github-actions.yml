@@ -33,9 +33,9 @@ jobs:
           python --version
           python -m pip install pipenv
           pipenv install
-          pipenv run python modeller.py -d -a generateDocs -i ../master/model.xml
-          cp model.docx ../gh-page/
-          cp model.html ../gh-page/index.html
+          pipenv run python modeller.py -d -a generateDocs -i ../master/model.xml -f docx html
+          cp ../master/model.docx ../gh-page/tibschol_model.docx
+          cp ../master/model.html ../gh-page/index.html
           cd ..
       
       - name: Commit results to gh pages
