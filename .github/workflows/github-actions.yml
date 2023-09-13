@@ -24,9 +24,9 @@ jobs:
         with:
           python-version: '3.11'
           cache: "pipenv"
-      - name: install graphviz
+      - name: install system dependencies
         run: |
-          sudo apt-get install graphviz 
+          sudo apt-get install graphviz pandoc
       - name: Build
         run: |
           cd modeller
