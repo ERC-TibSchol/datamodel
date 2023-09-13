@@ -9,39 +9,39 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: master
-      - name: Checkout gh_pages
+      - name: Checkout gh-pages
         uses: actions/checkout@v3
         with:
-          ref: gh_page
-          #path: gh_page
-      # - name: Checkout modeller
-      #   uses: actions/checkout@v3
-      #   with:
-      #     repository: dasch124/modeller
-      #     path: modeller
-      # - name: Get python 3.11
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.11'
-      #     cache: "pipenv"
-      # - name: Build
-      #   run: |
-      #     python --version
-      #     python -m pip install pipenv
-      #     pipenv install
-      #     pipenv run python modeller.py -a generateDocs -i model.xml
+          ref: gh-page
+          path: gh-page
+      - name: Checkout modeller
+        uses: actions/checkout@v3
+        with:
+          repository: dasch124/modeller
+          path: modeller
+      - name: Get python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: "pipenv"
+      - name: Build
+        run: |
+          python --version
+          python -m pip install pipenv
+          pipenv install
+          pipenv run python modeller.py -a generateDocs -i model.xml
       
-      # - name: Commit results to gh pages
-      #   run: |
-      #     cp model.docx gh_page/
-      #     cp model.html gh_page/index.html
-      #     cd gh_page
-      #     git config --local user.email "github-actions[bot]@users.noreply.github.com"
-      #     git config --local user.name "github-actions[bot]"
-      #     git add *.html
-      #     git commit -m "New version of datamodel" -a || true
-      # - name: Push changes back to GitHub
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     branch: gh_page
-      #     directory: gh_page
+      - name: Commit results to gh pages
+        run: |
+          cp model.docx gh-page/
+          cp model.html gh-page/index.html
+          cd gh-page
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add *.html
+          git commit -m "New version of datamodel" -a || true
+      - name: Push changes back to GitHub
+        uses: ad-m/github-push-action@master
+        with:
+          branch: gh-page
+          directory: gh-page
