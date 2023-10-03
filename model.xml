@@ -321,9 +321,9 @@
                     <targetClass target="TEIdocument">
                         <arity>1</arity>
                     </targetClass>
-                    <name>is edied and marked up in</name>
+                    <name>is edited and marked up in</name>
                     <reverseName>contains</reverseName>
-                    <note>Relevant excerpts are marked up with the tag "seg" in the TEI document.</note>
+                    <note>Relevant excerpts are marked up with the tag "seg" in the TEI document. Their content is critically edited.</note>
                 </relation>
             </relations>
         </class>
