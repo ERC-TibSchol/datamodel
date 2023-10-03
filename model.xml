@@ -34,13 +34,14 @@
             <change status="draft" when="2022-05-06" who="DS">adding relations from APIS_Entities -List of Relations.xlsx</change>
             <change status="draft" when="2023-08-31" who="PH">Update descriptions</change>
             <change status="draft" when="2023-09-01" who="PH">Update model to match current</change>
+            <change status="draft" when="2023-10-03" who="PH">Update text intro</change>
         </changelog>
         <audience>EXTERNAL</audience>
         <namespaces>
             <namespace prefix="bibframe">http://id.loc.gov/ontologies/bibframe/</namespace>
         </namespaces>
     </meta>
-    <description><p>This is the overall data model for the project TibSchol - The Dawn of Tibetan Buddhist Scholasticism (11th-13th c.). This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 101001002).</p></description>
+    <description><p>This is the overall data model for the project TibSchol - The Dawn of Tibetan Buddhist Scholasticism (11th-13th c.). This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 101001002). It is hosted at the Institute for the Cultural and Intellectual History of Asia of the Austrian Academy of Sciences. Note: The description below is a work in progress. The graphical overview only represents the relations between entities. </p></description>
     <classes>
         
         <class ID="Instance">
@@ -294,25 +295,14 @@
                 </property>
             </properties>
             <relations>
-                <relation ID="excerptIsfrom">
-                    <sourceClass target="Excerpt">
-                        <arity>0-n</arity>
-                    </sourceClass>
-                    <targetClass target="Instance">
-                        <arity>1</arity>
-                    </targetClass>
-                    <name>is from</name>
-                    <reverseName>contains</reverseName>
-                <note>An excerpt can include a passage from the Work, a gloss, or other types of paratextual or extra-textual annotations present in the Instance.</note>
-                </relation>
-                <relation ID="excerptIsMarkedupInTEIdocument">
+                 <relation ID="excerptIsMarkedupInTEIdocument">
                     <sourceClass target="Excerpt">
                         <arity>1</arity>
                     </sourceClass>
                     <targetClass target="TEIdocument">
                         <arity>1</arity>
                     </targetClass>
-                    <name>is marked up in</name>
+                    <name>is edied and marked up in</name>
                     <reverseName>contains</reverseName>
                     <note>Relevant excerpts are marked up with the tag "seg" in the TEI document.</note>
                 </relation>
