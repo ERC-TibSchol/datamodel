@@ -41,7 +41,7 @@
             <namespace prefix="bibframe">http://id.loc.gov/ontologies/bibframe/</namespace>
         </namespaces>
     </meta>
-    <description><p>This is the overall data model for the project TibSchol - The Dawn of Tibetan Buddhist Scholasticism (11th-13th c.). This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 101001002). It is hosted at the Institute for the Cultural and Intellectual History of Asia of the Austrian Academy of Sciences. Note: The description below is a work in progress. The graphical overview only represents the relations between entities. </p></description>
+    <description><p>This is the overall data model for the project TibSchol - The Dawn of Tibetan Buddhist Scholasticism (11th-13th c.). This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 101001002). It is hosted at the Institute for the Cultural and Intellectual History of Asia of the Austrian Academy of Sciences. Note: The description below is a work in progress. The graphical overview represents the relations between entities (Place/Work/Person/Instance). "Excerpts" (in TEI documents) and "External references" operate as Support for these relations. </p></description>
     <classes>
         
         <class ID="Instance">
@@ -268,6 +268,25 @@
             <mapping targetLanguage="bibframe">
                 <className uri="https://id.loc.gov/ontologies/bibframe/Person.rdf">bibframe:Person</className>
             </mapping>
+        </class>
+        
+        <class ID="External_reference">
+            <name>External reference</name>
+            <definition>A passage in a historical work or a publication that supports the relation between two entities.</definition>
+            <properties>
+                <property ID="Type">
+                    <arity>1</arity>
+                    <name>Type</name>
+                    <datatypeName target="Type"/>
+                    <note>The type of support: a Zotero entry or another type.</note>
+                </property>
+                <property ID="Zotero_ID">
+                    <arity>1</arity>
+                    <name>Zotero ID</name>
+                    <datatypeName target="Zotero_ID"/>
+                    <note>Zotero ID of the publication in Zotero in which the passage supporting the relation is found.</note>
+                </property>
+            </properties>
         </class>
                 
         <class ID="Excerpt">
