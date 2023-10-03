@@ -25,7 +25,7 @@
                   </tr>
                   <tr>
                      <td>Documentation generated: </td>
-                     <td>2023-10-03T07:43:09.020316Z</td>
+                     <td>2023-10-03T07:57:12.234196Z</td>
                   </tr>
                </table>
             </header>
@@ -288,11 +288,10 @@
                <h4 class="title is-4">Definition</h4>
                <p class="block">The abstract notion of an intellectual creation by one or several <a role="className" href="#Person">&lt;PERSONS&gt;</a>, irrespective of its exact transmitted version, language, form etc.</p>
                <p class="block">A <a role="className" href="#Work">&lt;WORK&gt;</a>is transmitted in one or several <a role="className" href="#Instance">&lt;INSTANCES&gt;</a>. The project does not deal with Instances for Indian works.</p>
-               <p class="block">Works can be related to persons (see "PersonToWork"), to places, and to other works.
-                  They are transmitted in one or several instances (see "InstanceToWork").</p>
+               <p class="block"><a role="className" href="#Work">&lt;WORKS&gt;</a> can be related to persons (see "PersonToWork"), to places, and to other <a role="className" href="#Work">&lt;WORKS&gt;</a>. They are transmitted in one or several instances (see "InstanceToWork").</p>
             </div>
-            <div class="box"><span class="tag is-info is-light">NOTE</span> A Place can be related to another <a role="className" href="#Place">&lt;PLACE&gt;</a>, to a Work (see "WorkToPlace"), to an Instance (see "InstanceToPlace"), or to a Person
-               (see "PersonToPlace")
+            <div class="box"><span class="tag is-info is-light">NOTE</span> A Place can be related to another <a role="className" href="#Place">&lt;PLACE&gt;</a>, to a <a role="className" href="#Work">&lt;WORK&gt;</a> (see "WorkToPlace"), to an Instance (see "InstanceToPlace"), or to a Person (see
+               "PersonToPlace")
                <p class="is-size-7 has-text-right has-text-weight-light"></p>
             </div>
             <div class="content">
@@ -341,8 +340,8 @@
                countries, regions, towns and villages, as well as monasteries.
                <p class="is-size-7 has-text-right has-text-weight-light"></p>
             </div>
-            <div class="box"><span class="tag is-info is-light">NOTE</span> A Place can be related to another <a role="className" href="#Place">&lt;PLACE&gt;</a>, to a Work (see "WorkToPlace"), to an Instance (see "InstanceToPlace"), or to a Person
-               (see "PersonToPlace")
+            <div class="box"><span class="tag is-info is-light">NOTE</span> A Place can be related to another <a role="className" href="#Place">&lt;PLACE&gt;</a>, to a <a role="className" href="#Work">&lt;WORK&gt;</a> (see "WorkToPlace"), to an Instance (see "InstanceToPlace"), or to a Person (see
+               "PersonToPlace")
                <p class="is-size-7 has-text-right has-text-weight-light"></p>
             </div>
             <div class="content">
@@ -383,8 +382,7 @@
             <div class="content">
                <h4 class="title is-4">Definition</h4>Any person in the domain, independent of its role. The notion of Person includes human
                beings as well as Buddhas and Bodhisattvas.</div>
-            <div class="box"><span class="tag is-info is-light">NOTE</span> A <a role="className" href="#Person">&lt;PERSON&gt;</a> can be connected to a Place, a Work, an Instance (see "InstanceToPerson"), and other
-               Persons.
+            <div class="box"><span class="tag is-info is-light">NOTE</span> A <a role="className" href="#Person">&lt;PERSON&gt;</a> can be connected to a Place, a <a role="className" href="#Work">&lt;WORK&gt;</a>, an Instance (see "InstanceToPerson"), and other Persons.
                <p class="is-size-7 has-text-right has-text-weight-light"></p>
             </div>
             <div class="content">
@@ -621,9 +619,9 @@
             <hr /><a id="PersonToWork"></a><h5 class="title is-5">is author of</h5>
             <p class="subtitle">authored by</p>
             <p><strong>Cardinality: </strong>0-n / 0-n<br /><strong>Source Class: </strong><a role="class" href="#Person">&lt;PERSON&gt;</a><br /><strong>Target Class: </strong><a role="class" href="#Work">&lt;WORK&gt;</a><br /></p>
-            <div class="box"><span class="tag is-warning is-light">NOTE</span> Other Person-Work relations are for a Person requesting a Work to be composed, a Person
-               sponsoring its composition, for Persons having their teaching recorded in a Work (the
-               person recording the teaching qualifies as the author), and for addressee of the Work.
+            <div class="box"><span class="tag is-warning is-light">NOTE</span> Other Person-Work relations are for a Person requesting a <a role="className" href="#Work">&lt;WORK&gt;</a> to be composed, a Person sponsoring its composition, for Persons having their teaching
+               recorded in a <a role="className" href="#Work">&lt;WORK&gt;</a> (the person recording the teaching qualifies as the author), and for addressee of
+               the <a role="className" href="#Work">&lt;WORK&gt;</a>.
                <p class="is-size-7 has-text-right has-text-weight-light"></p>
             </div>
             <hr /><a id="PersonToPerson"></a><h5 class="title is-5">personal/intellectual relation to</h5>
