@@ -300,7 +300,7 @@
                     <arity>1</arity>
                     <name>Attributes</name>
                     <datatypeName target="shortText"/>
-                    <note>Attributes of an <className target="excerpt">Excerpt</className> in the <className target="TEIdocument">TEI document</className> include: the identifier; the status (unreviewed to finalized); and optionally a topic (what an excerpt is about - controlled vocabulary).</note>
+                    <note>Attributes of an <className target="Excerpt">Excerpt</className> in the <className target="TEIdocument">TEI document</className> include: the identifier; the status (unreviewed to finalized); and optionally a topic (what an excerpt is about - controlled vocabulary).</note>
                 </property>
 <!--
                 <property ID="Identifier">
@@ -341,7 +341,7 @@
                 <property ID="TEIdocument.id">
                     <arity>1</arity>
                     <name>Document ID</name>
-                    <datatypeName target="Identifier"/>
+                    <datatypeName target="shortText"/>
                 </property>
                 <property ID="TEIdocument.content">
                     <arity>1</arity>
@@ -412,7 +412,7 @@
             <name>Year</name>
         </datatype>
     </datatypes>
-<!--TODO is this datatypes section relevant?-->
+
 
 
     <references>
