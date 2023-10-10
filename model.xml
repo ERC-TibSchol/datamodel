@@ -302,7 +302,7 @@
                     <datatypeName target="shortText"/>
                     <note>Attributes of an <className target="excerpt">Excerpt</className> in the <className target="TEIdocument">TEI document</className> include: the identifier; the status (unreviewed to finalized); and optionally a topic (what an excerpt is about - controlled vocabulary).</note>
                 </property>
-
+<!--
                 <property ID="Identifier">
                     <arity>1</arity>
                     <name>Identifier</name>
@@ -317,8 +317,9 @@
                     <arity>1</arity>
                     <name>Topic</name>
                     <datatypeName target="vocab.topics"/>
-                </property>
+                </property>-->
             </properties>
+            
             <relations>
                  <relation ID="excerptIsMarkedupInTEIdocument">
                     <sourceClass target="Excerpt">
