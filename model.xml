@@ -273,18 +273,20 @@
             <name>External reference</name>
             <definition>A passage in a historical work or a publication that supports the relation between two entities.</definition>
             <properties>
-                <property ID="Type">
+                <property ID="external_reference.attributes">
                     <arity>1</arity>
-                    <name>Type</name>
-                    <datatypeName target="Type"/>
-                    <note>The type of support: a Zotero entry or another type.</note>
+                    <name>Attributes</name>
+                    <datatypeName target="shortText"/>
+                    <note>The attributes of an external reference are its type (Zotero entry or another type of support) and for Zotero entries the Zotero ID of the publication in TibSchol Zotero library in which the passage supporting the relation is found.</note>
                 </property>
+
+                <!--
                 <property ID="Zotero_ID">
                     <arity>1</arity>
                     <name>Zotero ID</name>
                     <datatypeName target="Zotero_ID"/>
                     <note>Zotero ID of the publication in Zotero in which the passage supporting the relation is found.</note>
-                </property>
+                </property>-->
             </properties>
         </class>
                 
