@@ -35,6 +35,7 @@
             <change status="draft" when="2023-08-31" who="PH">Update descriptions</change>
             <change status="draft" when="2023-09-01" who="PH">Update model to match current</change>
             <change status="draft" when="2023-10-03" who="PH">Update text intro</change>
+            <change status="draft" when="2023-10-10" who="PH">Update text intro continued</change>
         </changelog>
         <audience>EXTERNAL</audience>
         <namespaces>
@@ -47,10 +48,10 @@
         <class ID="Instance">
             <name>Instance</name>
             <definition>
-                <p>An <className target="Instance">Instance</className> is an instance of a specific <className target="Work">Work</className> and can be related to another <className target="Instance">Instance</className>; to a <className target="Person">Person</className>; to a <className target="Place">location (Place)</className></p>
-                
-                
-<!--<p>A version of a given <className>Work</className> reflected in an individual, material embodiment, notably, instantiated in writing in a physical object (manuscript, blockprint, book, etc.). Such resource may or may not be extant. In addition to the text representing the Work, and instance may include paratextual elements and extra-textual elements.</p>-->
+                <p>An <className target="Instance">Instance</className> is the particular embodiment of a specific <className target="Work">Work</className>.</p> 
+                <note><p>An <className target="Instance">Instance</className> is notably instantiated in writing in a physical object (manuscript, blockprint, book, etc.). Such resource may or may not be extant, or might be extant but not accessible. In addition to the <className target="Work">Work</className>, an instance may include paratextual elements and extra-textual elements.</p>
+                <p>An <className target="Instance">Instance</className> can be related to another <className target="Instance">Instance</className>; to a <className target="Person">Person</className>; or to a <className target="Place">Place</className>.</p>
+                </note>
             </definition>
             
             <properties>
@@ -58,7 +59,7 @@
                     <arity>1</arity>
                     <name>Attributes</name>
                     <datatypeName target="shortText"/>
-                    <note>Attributes of Instance-entities are: the identifier(s) of the instance (e.g., signature on the Instance, catalogue number, TibSchol number); the title (identical to the name of the <className target="Work">Work</className>); the source (bibliographical reference for the instance itself or a physical or digital copy of the original physical object); external link(s) (e.g., to BUDA https://library.bdrc.io/, which provides a link to digital images); length (number of folios); indication of proofreading by scribe or reader. A free field for comments records pertinent features of the <className target="Instance">Instance</className> not included in the set attribute fields.</note>
+                    <note>Attributes of <className target="Instance">Instance</className>-entities are: identifier(s) of the instance (e.g., signature on the manuscript, catalogue number, TibSchol number); the title (identical to the name of the <className target="Work">Work</className>); the source (bibliographical reference for the instance itself or for a physical or digital copy of the original physical object); external link(s) (e.g., to the online library of the Buddhist Digital Resource Center https://library.bdrc.io/, which provides a link to digital images for numerous items); length (number of folios); indication of proofreading by scribe or reader. Pertinent features of the <className target="Instance">Instance</className> not already included in the set of attribute fields are recorded in the field "Item description," any additional comments in the field "Comments."</note>
                 </property>
           </properties>
 
@@ -144,11 +145,10 @@
         <class ID="Work">
             <name>Work</name>
             <definition>
-                <p>The abstract notion of an intellectual creation by one or several <className target="Person">persons</className>, irrespective of its exact transmitted version, language, form etc.</p>
-                <p>A <className target="Work">Work</className>is transmitted in one or several <className target="Instance">Instances</className>. The project does not deal with Instances for Indian works.</p>
-                <p><className target="Work">Works</className> can be related to persons (see "PersonToWork"), to places, and to other <className target="Work">Works</className>. They are transmitted in one or several instances (see "InstanceToWork").</p>
+                <p>The abstract notion of an intellectual creation by one or several <className target="Person">Person</className>s, irrespective of its exact transmitted version, language, form etc.</p>
+                <note><p>A <className target="Work">Work</className>is transmitted in one or several <className target="Instance">Instances</className> - (see "InstanceToWork") (note: The project does not deal with Instances for Indian works). <className target="Work">Work</className> are extant or non-extant. A <className target="Work">Work</className> is extant if it has at least one currently extant <className target="Instance">Instance</className>.</p> 
+                <p>A <className target="Work">Work</className> can be related to a<className target="Person">Person</className>(see "PersonToWork"); to a <className target="Place">Place</className>; and to another <className target="Work">Work</className>.</p></note>
             </definition>
-            <note>A Place can be related to another <className target="Place">Place</className>, to a <className target="Work">Work</className> (see "WorkToPlace"), to an Instance (see "InstanceToPlace"), or to a Person (see "PersonToPlace")</note>
             
             <properties>
                 <property ID="work.attributes">
@@ -189,14 +189,13 @@
         <class ID="Place">
             <name>Place</name>
             <definition>Any kind of location.</definition>
-            <note>The project focuses on real locations situated within the human realm. These are e.g., countries, regions, towns and villages, as well as monasteries.</note>
-            <note>A Place can be related to another <className target="Place">Place</className>, to a <className target="Work">Work</className> (see "WorkToPlace"), to an Instance (see "InstanceToPlace"), or to a Person (see "PersonToPlace")</note>
+            <note><p>The project focuses on real locations situated within the human realm. These are e.g., countries, regions, towns and villages, as well as monasteries.</p> <p>A <className target="Place">Place</className> can be related to another <className target="Place">Place</className>; to a <className target="Work">Work</className> (see "WorkToPlace"); to an <className target="Instance">Instance</className> (see "InstanceToPlace"), or to a <className target="Person">Person</className> (see "PersonToPlace").</p></note>
             <properties>
                 <property ID="place.attributes">
                     <arity>1</arity>
                     <name>Attributes</name>
                     <datatypeName target="shortText"/>
-                    <note>Attributes of Places are: name (and alternative names); GPS coordinates; external link. A free field for comments records pertinent features of the <className target="Place">Place</className> not included in the set attribute fields.</note>
+                    <note>Attributes of a <className target="Place">Place</className> are: name (and alternative names); GPS coordinates; external link. A free field for comments records pertinent features of the <className target="Place">Place</className> not included in the set attribute fields.</note>
                 </property>
             </properties>
             <relations>
@@ -216,14 +215,14 @@
         
         <class ID="Person">
             <name>Person</name>
-            <definition>Any person in the domain, independent of its role. The notion of Person includes human beings as well as Buddhas and Bodhisattvas.</definition>
-            <note>A <className target="Person">Person</className> can be connected to a Place, a <className target="Work">Work</className>, an Instance (see "InstanceToPerson"), and other Persons.</note>
+            <definition>The notion of Person includes human beings as well as Buddhas and Bodhisattvas.</definition>
+            <note><p>The project focuses on persons from the 10th to 15th century who were active in scholastic networks in Tibet - the main roles considered being those of authors and teachers/students, but also those of manuscript owners and donors. Also included are persons acting as links between the preceding persons, or whose connection with them allows putting them on the map, independently of their role. </p><p>A <className target="Person">Person</className> can be connected to a <className target="Place">Place</className>; a <className target="Work">Work</className>, an <className target="Instance">Instance</className> (see "InstanceToPerson"); and to another <className target="Person">Person</className>.</p></note>
             <properties>
                 <property ID="person.attributes">
                     <arity>1</arity>
                     <name>Attributes</name>
                     <datatypeName target="shortText"/>
-                    <note>Attributes of a Person include: name (the name of the person and alternative names and titles, including in other languages); dates (birth, death, floruit - exact or approximation to be mapped to a date range); type (gender, nationality, monastic/lay status); external link (link to external resources providing information about that person, such as BUDA https://library.bdrc.io/). A free field for comments records pertinent features of the <className target="Person">Person</className> not included in the set attribute fields.</note>
+                    <note>Attributes of a <className target="Person">Person</className> include: name (the name of the person and alternative names and titles, including in other languages); dates (birth, death, floruit - exact or approximation to be mapped to a date range); type (gender, nationality, monastic/lay status); external link (link to external resources providing additional information about that person, such as BUDA https://library.bdrc.io/). A free field for comments records pertinent features of the <className target="Person">Person</className> not included in the set attribute fields.</note>
                 </property>
             </properties>
 
@@ -291,26 +290,31 @@
                 
         <class ID="Excerpt">
             <name>Excerpt</name>
-            <definition>A textual passage represented in an <className>Instance</className>.</definition>
+            <definition>A textual passage from an <className target="Instance">Instance</className>, as represented in a <className target="TEIdocument">TEI document</className>.</definition>
+            <note>Excerpts that are thematically relevant or can play the role of support for the relation between entities are marked up with the tag "seg" in the TEI document. Their content is critically edited.</note>
           
             <properties>
+                <property ID="excerpt.attributes">
+                    <arity>1</arity>
+                    <name>Attributes</name>
+                    <datatypeName target="shortText"/>
+                    <note>Attributes of an <className target="excerpt">Excerpt</className> in the <className target="TEIdocument">TEI document</className> include: the identifier; the status (unreviewed to finalized); and optionally a topic (what an excerpt is about - controlled vocabulary).</note>
+                </property>
+
                 <property ID="Identifier">
                     <arity>1</arity>
                     <name>Identifier</name>
                     <datatypeName target="Identifier"/>
-                    <note>The identifier of the excerpt as it is provided in the TEI document.</note>
                 </property>
                 <property ID="excerpt.status">
                     <arity>1</arity>
                     <name>Status</name>
                     <datatypeName target="vocab.excerptStatus"/>
-                    <note>Attributes of excerpts in the TEI document include the status (unreviewed to finalized) and a topic (what an excerpt is about - controlled vocabulary).</note>
                 </property>
                 <property ID="excerpt.topic">
                     <arity>1</arity>
                     <name>Topic</name>
                     <datatypeName target="vocab.topics"/>
-                    <note>Attributes of excerpts in the TEI document include the status (unreviewed to finalized) and a topic (what an excerpt is about - controlled vocabulary).</note>
                 </property>
             </properties>
             <relations>
@@ -323,7 +327,6 @@
                     </targetClass>
                     <name>is edited and marked up in</name>
                     <reverseName>contains</reverseName>
-                    <note>Relevant excerpts are marked up with the tag "seg" in the TEI document. Their content is critically edited.</note>
                 </relation>
             </relations>
         </class>
