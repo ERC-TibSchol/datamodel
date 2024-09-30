@@ -1,6 +1,7 @@
 # TibSchol Data Model
 
 In this repository we keep the definitions of the overall TibSchol data model.
+The following file contains a visual sketch: TibSchol APIS data model sketch 20240930.pdf
 
 NB The TEI customization and RNG Schema are part of the TibSchol Curation repository.
 
