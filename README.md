@@ -2,7 +2,7 @@
 
 In this repository we keep the definitions of the overall TibSchol data model.
 
-The following file contains a [visual sketch of the model](https://github.com/ERC-TibSchol/datamodel/blob/master/TibSchol%20APIS%20data%20model%20sketch%2020240930.pdf).
+The following file contains a [visual sketch of the model](https://github.com/ERC-TibSchol/datamodel/blob/master/TibSchol_datamodel_sketch.pdf).
 
 NB The TEI customization and RNG Schema are part of the TibSchol Curation repository.
 
