@@ -4,7 +4,7 @@ In this repository we keep the definitions of the overall TibSchol data model.
 
 Here is a [visual sketch of the model](https://github.com/ERC-TibSchol/datamodel/blob/master/TibSchol_datamodel_sketch.pdf).
 
-NB The TEI customization and RNG Schema are part of the TibSchol Curation repository.
+NB The TEI customization and RNG Schema are part of the TibSchol Curation repository (private).
 
 ## How to build the html output
 
